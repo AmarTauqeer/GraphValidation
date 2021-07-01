@@ -1,0 +1,32 @@
+@prefix ex: <http://example.org/ns#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+ex:Gilbert
+    a schema:Person ;
+    schema:givenName "Gilbert N. Lewis" ;
+    schema:familyName "Junior" ;
+    schema:birthDate "1875-10-25"^^xsd:date ;
+    schema:placeOfBirth "Weymouth,_Massachusetts" ;
+    schema:address ex:AgustínsAddress .
+ex:AgustínsAddress
+    schema:streetAddress "1600 Amphitheatre Pkway" ;
+    schema:postalCode 9404 .
+ex:James
+    a schema:Person ;
+    schema:givenName "James Brown" ;
+    schema:familyName "Junior" ;
+    schema:birthDate "1933-05-03"^^xsd:date ;
+    schema:placeOfBirth "Barnwell,_South_Carolina" .
+ex:Margaret
+    a schema:Person ;
+    schema:givenName "Margaret Mitchell" ;
+    schema:familyName "Junior" ;
+    schema:birthDate "1900-11-08"^^xsd:date ;
+    schema:placeOfBirth "Louisiana" ;
+    schema:address ex:BrucesAddress .
+ex:BrucesAddress
+    schema:streetAddress "1800 Amphitheatre Pkway" ;
+    schema:postalCode 9405 .
+
