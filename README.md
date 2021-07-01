@@ -14,7 +14,7 @@ Open folder in VS Code
 
 Open terminal
 
-## Frontend
+### Frontend
 
 cd graph-validation
 
@@ -22,7 +22,7 @@ npm install
 
 npm start
 
-## Backend
+### Backend
 
 cd backend
 
