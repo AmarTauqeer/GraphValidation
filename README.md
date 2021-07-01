@@ -4,7 +4,7 @@ KG validation about Google Places, Open Street Map and Yandex Places WikiData an
 
 ### Tools
 
-Node,React, Bootstrap, REST APIs, Axios,git
+Node,React, Bootstrap, REST APIs, Axios,git, Flask restful api, Python, SPARQL, RdfLib.
 
 ### Installation
 
@@ -14,11 +14,25 @@ Open folder in VS Code
 
 Open terminal
 
+## Frontend
+
 cd graph-validation
 
 npm install
 
 npm start
+
+## Backend
+
+cd backend
+
+run command in windows: python -m venv venv
+
+run command in windows: venv\Scripts\activate
+
+run command in windows: pip install -r requirements.txt
+
+run command in windows: python -m flask-run
 
 
 ### live Demo
