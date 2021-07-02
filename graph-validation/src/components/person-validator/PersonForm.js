@@ -5,8 +5,8 @@ import axios from "axios";
 
 function PersonForm() {
   const [graphData, setGraphData] = useState([]);
-  const [weightWiki, setWeightWiki] = useState(0);
-  const [weightDbPedia, setweightDbPedia] = useState(0);
+  const [weightWiki, setWeightWiki] = useState(0.3);
+  const [weightDbPedia, setweightDbPedia] = useState(0.7);
   const [confidence, setConfidence] = useState([]);
   const [selectedFile, setSelectedFile] = useState();
   const [loading, setLoading] = useState(false);
@@ -16,6 +16,12 @@ function PersonForm() {
     // check for required fields
     if (!selectedFile || !weightWiki || !weightDbPedia) {
       alert("Please look required fields.");
+      return false;
+    }
+    // check for weights total
+    let totalWeight = parseFloat(weightWiki) + parseFloat(weightDbPedia);
+    if (totalWeight !== 1.0) {
+      alert("Sum of weights should be 1");
       return false;
     }
     // prepare file data
@@ -34,7 +40,6 @@ function PersonForm() {
           weightWiki,
           weightDbPedia
         );
-
         if (confidence) {
           setConfidence(confidence);
           setLoading(false);
@@ -42,7 +47,6 @@ function PersonForm() {
       });
     });
   };
-
   // get result from wiki and dbpedia
   const getResult = async (graphdata) => {
     const resp = await getData(graphdata);
@@ -137,105 +141,140 @@ function PersonForm() {
         </div>
       </form>
       <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <div className="col-md-3">
-            <b>Name</b>
+        <div
+          className="row"
+          style={{
+            backgroundColor: "#ff8000",
+            height: "50px",
+            fontSize: "16px",
+            verticalAlign: "center",
+          }}
+        >
+          <div className="col-sm-3 col-form-label col-form-label-sm">
+            <b>KG</b>
           </div>
-          <div className="col-md-2">
-            <b>DOB</b>
-          </div>
-          {/* <div className="col-md-3">
-            <b>Place of birth</b>
-          </div> */}
-          <div className="col-md-1">
+          <div className="col-sm-2 col-form-label col-form-label-sm">
             <b>Wiki</b>
           </div>
-          <div className="col-md-1">
+          <div className="col-sm-2 col-form-label col-form-label-sm">
             <b>DbPedia</b>
           </div>
-          <div className="col-md-1">
-            <b>Overall</b>
+          <div className="col-sm-1 col-form-label col-form-label-sm">
+            <b>Confidence</b>
           </div>
-        </nav>
-        {graphData
-          ? graphData.map((item, index) => {
-              let overallConfidence = 0;
-              return (
-                <div className="row" key={index}>
-                  <div
-                    className="col-sm-3 col-form-label col-form-label-sm"
-                    key={item.givenName}
-                  >
-                    {item.givenName}
-                  </div>
-                  <div className="col-sm-2 col-form-label col-form-label-sm">
-                    {item.birthDate}
-                  </div>
-                  {/* <div className="col-sm-3 col-form-label col-form-label-sm">
-                    {item.placeOfBirth}
-                  </div> */}
-                  <div
-                    className="col-sm-1 col-form-label col-form-label-sm"
-                    style={{ textAlign: "center" }}
-                  >
+          <div className="col-sm-1 col-form-label col-form-label-sm">
+            <b>Instance Confidence</b>
+          </div>
+        </div>
+        {loading ? (
+          <div>loading...</div>
+        ) : (
+          graphData.map((item, index) => {
+            let nameConfidencePerRow = 0.0;
+            let dobConfidencePerRow = 0.0;
+            return (
+              <div className="row" key={index}>
+                <div className="col-sm-3 col-form-label col-form-label-sm">
+                  {item.givenName}
+                </div>
+                <div className="col-sm-2 col-form-label col-form-label-sm">
+                  <div className="row">
                     {loading ? (
                       <div>loading...</div>
                     ) : (
                       confidence
                         .filter(
                           (c) =>
-                            c.givenName === item.givenName &&
-                            c.confidence !== 0 &&
-                            c.wiki === "true"
+                            c.givenName === item.givenName && c.wiki === "true"
                         )
                         .map((result) => {
                           if (result.confidence > 0) {
-                            overallConfidence += parseInt(
-                              result.confidence,
-                              10
+                            nameConfidencePerRow += parseFloat(
+                              result.confidence
                             );
                           }
-
-                          return parseInt(result.confidence, 10);
+                          return result.givenName;
                         })
                     )}
                   </div>
-                  <div
-                    className="col-sm-1 col-form-label col-form-label-sm"
-                    style={{ textAlign: "center" }}
-                  >
+
+                  <div className="row">
                     {loading ? (
                       <div>loading...</div>
                     ) : (
                       confidence
                         .filter(
-                          (c) =>
-                            c.givenName === item.givenName &&
-                            c.confidence !== 0 &&
-                            c.wiki === "false"
+                          (c) => c.dob === item.birthDate && c.wiki === "true"
                         )
                         .map((result) => {
                           if (result.confidence > 0) {
-                            overallConfidence += parseInt(
-                              result.confidence,
-                              10
+                            dobConfidencePerRow += parseFloat(
+                              result.confidence
                             );
                           }
-
-                          return parseInt(result.confidence, 10);
+                          return result.dob;
                         })
                     )}
-                  </div>
-                  <div
-                    className="col-sm-1 col-form-label col-form-label-sm"
-                    style={{ textAlign: "center", fontWeight: "bold" }}
-                  >
-                    {loading ? <div>loading...</div> : overallConfidence}
                   </div>
                 </div>
-              );
-            })
-          : ""}
+                <div className="col-sm-2 col-form-label col-form-label-sm">
+                  <div className="row">
+                    {loading ? (
+                      <div>loading...</div>
+                    ) : (
+                      confidence
+                        .filter(
+                          (c) =>
+                            c.givenName === item.givenName &&
+                            c.dbpedia === "true"
+                        )
+                        .map((result) => {
+                          if (result.confidence > 0) {
+                            nameConfidencePerRow += parseFloat(
+                              result.confidence
+                            );
+                          }
+                          return result.givenName;
+                        })
+                    )}
+                  </div>
+                  <div className="row">
+                    {loading ? (
+                      <div>loading...</div>
+                    ) : (
+                      confidence
+                        .filter(
+                          (c) =>
+                            c.dob === item.birthDate && c.dbpedia === "true"
+                        )
+                        .map((result) => {
+                          if (result.confidence > 0) {
+                            dobConfidencePerRow += parseFloat(
+                              result.confidence
+                            );
+                          }
+                          return result.dob;
+                        })
+                    )}
+                  </div>
+                </div>
+                <div className="col-sm-1 col-form-label col-form-label-sm">
+                  <div className="row">
+                    {loading ? <div>loading...</div> : nameConfidencePerRow}
+                  </div>
+                  <div className="row">
+                    {loading ? <div>loading...</div> : dobConfidencePerRow}
+                  </div>
+                </div>
+                <div className="col-sm-1 col-form-label col-form-label-sm">
+                  {(parseFloat(nameConfidencePerRow) +
+                    parseFloat(dobConfidencePerRow)) /
+                    2}
+                </div>
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );

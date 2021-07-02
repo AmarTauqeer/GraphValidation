@@ -44,11 +44,12 @@ const getData = async (graphData) => {
       // get wiki data using sparql
       const wikiData = await GetWikiData(givenName, birthDate, placeOfBirth);
       if (wikiData.length > 0) {
+        let dateOfbirth = wikiData[0].dobLabel["value"];
         arr = [
           ...arr,
           {
             givenName: wikiData[0].birthName["value"],
-            dob: wikiData[0].dobLabel["value"],
+            dob: dateOfbirth.substring(0, 10),
             // placeOfBirth: wikiData[0].placeOfBirth["value"],
             wiki_status: "found",
             dbpedia_status: "",

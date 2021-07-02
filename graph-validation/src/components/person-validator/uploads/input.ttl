@@ -10,9 +10,6 @@ ex:Gilbert
     schema:birthDate "1875-10-25"^^xsd:date ;
     schema:placeOfBirth "Weymouth,_Massachusetts" ;
     schema:address ex:AgustínsAddress .
-ex:AgustínsAddress
-    schema:streetAddress "1600 Amphitheatre Pkway" ;
-    schema:postalCode 9404 .
 ex:James
     a schema:Person ;
     schema:givenName "James Brown" ;
@@ -26,7 +23,5 @@ ex:Margaret
     schema:birthDate "1900-11-08"^^xsd:date ;
     schema:placeOfBirth "Louisiana" ;
     schema:address ex:BrucesAddress .
-ex:BrucesAddress
-    schema:streetAddress "1800 Amphitheatre Pkway" ;
-    schema:postalCode 9405 .
+
 
