@@ -103,12 +103,12 @@ function PersonForm() {
           </div> */}
         <div className="form-group row">
           <div
-            className="col-sm-2 col-form-label col-form-label-sm "
+            className="col-sm-2 col-form-label col-form-label-sm"
             style={{ textAlign: "right" }}
           >
             <label>Wiki Weight *</label>
           </div>
-          <div className="col-md-2">
+          <div className="col-sm-3 form-control-sm">
             <input
               type="text"
               className="form-control form-control-sm"
@@ -117,13 +117,15 @@ function PersonForm() {
               onChange={(e) => setWeightWiki(e.target.value)}
             />
           </div>
+        </div>
+        <div className="form-group row">
           <div
             className="col-sm-2 col-form-label col-form-label-sm"
             style={{ textAlign: "right" }}
           >
             <label>DbPedia Weight *</label>
           </div>
-          <div className="col-sm-2">
+          <div className="col-sm-3 form-control-sm">
             <input
               type="text"
               className="form-control form-control-sm"
@@ -132,150 +134,173 @@ function PersonForm() {
               onChange={(e) => setweightDbPedia(e.target.value)}
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-success btn-sm form-control-sm"
+        </div>
+        <div className="form-group row">
+          <div
+            className="col-sm-2 col-form-label col-form-label-sm"
+            style={{ textAlign: "right" }}
           >
-            Validate
-          </button>
+            <label></label>
+          </div>
+          <div className="col-sm-2 form-control-sm">
+            <button
+              type="submit"
+              className="btn btn-success btn-sm form-control-sm"
+            >
+              Validate
+            </button>
+          </div>
         </div>
       </form>
-      <div>
-        <div
-          className="row"
-          style={{
-            backgroundColor: "#ff8000",
-            height: "50px",
-            fontSize: "16px",
-            verticalAlign: "center",
-          }}
-        >
-          <div className="col-sm-3 col-form-label col-form-label-sm">
-            <b>KG</b>
-          </div>
-          <div className="col-sm-2 col-form-label col-form-label-sm">
-            <b>Wiki</b>
-          </div>
-          <div className="col-sm-2 col-form-label col-form-label-sm">
-            <b>DbPedia</b>
-          </div>
-          <div className="col-sm-1 col-form-label col-form-label-sm">
-            <b>Confidence</b>
-          </div>
-          <div className="col-sm-1 col-form-label col-form-label-sm">
-            <b>Instance Confidence</b>
-          </div>
+      <div
+        className="row h-100"
+        style={{
+          backgroundColor: "#ff8000",
+          height: "50px",
+          fontSize: "16px",
+        }}
+      >
+        <div className="col-sm-3 col-form-label col-form-label-sm my-auto">
+          <b>KG</b>
         </div>
-        {loading ? (
-          <div>loading...</div>
-        ) : (
-          graphData.map((item, index) => {
-            let nameConfidencePerRow = 0.0;
-            let dobConfidencePerRow = 0.0;
-            return (
-              <div className="row" key={index}>
-                <div className="col-sm-3 col-form-label col-form-label-sm">
-                  {item.givenName}
+        <div className="col-sm-2 col-form-label col-form-label-sm my-auto">
+          <b>Wiki</b>
+        </div>
+        <div className="col-sm-2 col-form-label col-form-label-sm my-auto">
+          <b>DbPedia</b>
+        </div>
+        <div className="col-sm-2 col-form-label col-form-label-sm my-auto">
+          <b>Confidence</b>
+        </div>
+        <div className="col-sm-1 col-form-label col-form-label-sm my-auto">
+          <b>Instance Confidence</b>
+        </div>
+      </div>
+      {loading ? (
+        <div>loading...</div>
+      ) : (
+        graphData.map((item, index) => {
+          let nameConfidencePerRow = 0.0;
+          let dobConfidencePerRow = 0.0;
+          return (
+            <div className="row" key={index}>
+              <div className="col-sm-3 col-form-label col-form-label-sm">
+                {item.givenName}
+              </div>
+              <div className="col-sm-2 col-form-label col-form-label-sm">
+                <div className="row">
+                  {loading ? (
+                    <div>loading...</div>
+                  ) : (
+                    confidence
+                      .filter(
+                        (c) =>
+                          c.givenName === item.givenName && c.wiki === "true"
+                      )
+                      .map((result) => {
+                        if (result.confidence > 0) {
+                          nameConfidencePerRow += parseFloat(result.confidence);
+                        }
+                        return result.givenName;
+                      })
+                  )}
                 </div>
-                <div className="col-sm-2 col-form-label col-form-label-sm">
-                  <div className="row">
-                    {loading ? (
-                      <div>loading...</div>
-                    ) : (
-                      confidence
-                        .filter(
-                          (c) =>
-                            c.givenName === item.givenName && c.wiki === "true"
-                        )
-                        .map((result) => {
-                          if (result.confidence > 0) {
-                            nameConfidencePerRow += parseFloat(
-                              result.confidence
-                            );
-                          }
-                          return result.givenName;
-                        })
-                    )}
-                  </div>
 
-                  <div className="row">
-                    {loading ? (
-                      <div>loading...</div>
-                    ) : (
-                      confidence
-                        .filter(
-                          (c) => c.dob === item.birthDate && c.wiki === "true"
-                        )
-                        .map((result) => {
-                          if (result.confidence > 0) {
-                            dobConfidencePerRow += parseFloat(
-                              result.confidence
-                            );
-                          }
-                          return result.dob;
-                        })
-                    )}
-                  </div>
+                <div className="row">
+                  {loading ? (
+                    <div>loading...</div>
+                  ) : (
+                    confidence
+                      .filter(
+                        (c) => c.dob === item.birthDate && c.wiki === "true"
+                      )
+                      .map((result) => {
+                        if (result.confidence > 0) {
+                          dobConfidencePerRow += parseFloat(result.confidence);
+                        }
+                        return result.dob;
+                      })
+                  )}
                 </div>
-                <div className="col-sm-2 col-form-label col-form-label-sm">
-                  <div className="row">
-                    {loading ? (
-                      <div>loading...</div>
-                    ) : (
-                      confidence
-                        .filter(
-                          (c) =>
-                            c.givenName === item.givenName &&
-                            c.dbpedia === "true"
-                        )
-                        .map((result) => {
-                          if (result.confidence > 0) {
-                            nameConfidencePerRow += parseFloat(
-                              result.confidence
-                            );
-                          }
-                          return result.givenName;
-                        })
-                    )}
-                  </div>
-                  <div className="row">
-                    {loading ? (
-                      <div>loading...</div>
-                    ) : (
-                      confidence
-                        .filter(
-                          (c) =>
-                            c.dob === item.birthDate && c.dbpedia === "true"
-                        )
-                        .map((result) => {
-                          if (result.confidence > 0) {
-                            dobConfidencePerRow += parseFloat(
-                              result.confidence
-                            );
-                          }
-                          return result.dob;
-                        })
-                    )}
-                  </div>
+              </div>
+              <div className="col-sm-2 col-form-label col-form-label-sm">
+                <div className="row">
+                  {loading ? (
+                    <div>loading...</div>
+                  ) : (
+                    confidence
+                      .filter(
+                        (c) =>
+                          c.givenName === item.givenName && c.dbpedia === "true"
+                      )
+                      .map((result) => {
+                        if (result.confidence > 0) {
+                          nameConfidencePerRow += parseFloat(result.confidence);
+                        }
+                        return result.givenName;
+                      })
+                  )}
                 </div>
-                <div className="col-sm-1 col-form-label col-form-label-sm">
-                  <div className="row">
+                <div className="row">
+                  {loading ? (
+                    <div>loading...</div>
+                  ) : (
+                    confidence
+                      .filter(
+                        (c) => c.dob === item.birthDate && c.dbpedia === "true"
+                      )
+                      .map((result) => {
+                        if (result.confidence > 0) {
+                          dobConfidencePerRow += parseFloat(result.confidence);
+                        }
+                        return result.dob;
+                      })
+                  )}
+                </div>
+              </div>
+              <div className="col-sm-2 col-form-label col-form-label-sm">
+                <div className="row">
+                  <div
+                    className="col-sm-10"
+                    style={{
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      color: "blue",
+                    }}
+                  >
                     {loading ? <div>loading...</div> : nameConfidencePerRow}
                   </div>
-                  <div className="row">
+                </div>
+                <div className="row">
+                  <div
+                    className="col-sm-10"
+                    style={{
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      color: "red",
+                    }}
+                  >
                     {loading ? <div>loading...</div> : dobConfidencePerRow}
                   </div>
                 </div>
-                <div className="col-sm-1 col-form-label col-form-label-sm">
-                  {(parseFloat(nameConfidencePerRow) +
-                    parseFloat(dobConfidencePerRow)) /
-                    2}
-                </div>
               </div>
-            );
-          })
-        )}
-      </div>
+              <div
+                className="col-sm-1 col-form-label col-form-label-sm"
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: "16px",
+                  color: "green",
+                }}
+              >
+                {(parseFloat(nameConfidencePerRow) +
+                  parseFloat(dobConfidencePerRow)) /
+                  2}
+              </div>
+            </div>
+          );
+        })
+      )}
     </div>
   );
 }
