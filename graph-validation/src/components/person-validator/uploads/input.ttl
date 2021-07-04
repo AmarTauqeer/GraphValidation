@@ -23,5 +23,12 @@ ex:Margaret
     schema:birthDate "1900-11-08"^^xsd:date ;
     schema:placeOfBirth "Louisiana" ;
     schema:address ex:BrucesAddress .
+ex:Robert
+    a schema:Person ;
+    schema:givenName "Robert Noyce" ;
+    schema:familyName "Junior" ;
+    schema:birthDate "1927-12-12"^^xsd:date ;
+    schema:placeOfBirth "Louisiana" ;
+    schema:address ex:BrucesAddress .
 
 

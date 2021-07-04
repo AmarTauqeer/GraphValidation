@@ -10,9 +10,11 @@ function PersonForm() {
   const [confidence, setConfidence] = useState([]);
   const [selectedFile, setSelectedFile] = useState();
   const [loading, setLoading] = useState(false);
+  const [predicate, setPredicate] = useState("all");
   // submit handler
   const submitHandler = (e) => {
     e.preventDefault();
+
     // check for required fields
     if (!selectedFile || !weightWiki || !weightDbPedia) {
       alert("Please look required fields.");
@@ -64,6 +66,7 @@ function PersonForm() {
     return resp;
   };
 
+  // get result based on predicates
   return (
     <div>
       <form onSubmit={submitHandler}>
@@ -74,7 +77,7 @@ function PersonForm() {
           >
             <label>Input File *</label>
           </div>
-          <div className="col-sm-10 form-control-sm">
+          <div className="col-sm-10">
             <input
               type="file"
               name="file"
@@ -82,25 +85,28 @@ function PersonForm() {
             />
           </div>
         </div>
-        {/* <div className="form-group row">
-          <label className="col-sm-2 col-form-label">Properties</label>
+        <div className="form-group row">
+          <div
+            className="col-sm-2 col-form-label col-form-label-sm"
+            style={{ textAlign: "right" }}
+          >
+            <label>Properties *</label>
+          </div>
           <div className="col-sm-2">
             <select
-              className="form-control"
+              className="col-sm-10 form-control form-control-sm"
               name="predicate"
               value={predicate}
               onChange={(e) => setPredicate(e.target.value)}
-            > */}
-        {/* {predicateList.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
+            >
+              <option value="all" selected>
+                All
               </option>
-            ))} */}
-        {/* <option defaultValue="name">Name</option>
-              <option value="phone">Date of Birth</option>
-              <option value="address">Place of Birth</option>
+              <option value="name">Name</option>
+              <option value="dob">Date of Birth</option>
             </select>
-          </div> */}
+          </div>
+        </div>
         <div className="form-group row">
           <div
             className="col-sm-2 col-form-label col-form-label-sm"
@@ -108,7 +114,7 @@ function PersonForm() {
           >
             <label>Wiki Weight *</label>
           </div>
-          <div className="col-sm-3 form-control-sm">
+          <div className="col-sm-3">
             <input
               type="text"
               className="form-control form-control-sm"
@@ -125,7 +131,7 @@ function PersonForm() {
           >
             <label>DbPedia Weight *</label>
           </div>
-          <div className="col-sm-3 form-control-sm">
+          <div className="col-sm-3">
             <input
               type="text"
               className="form-control form-control-sm"
@@ -142,7 +148,7 @@ function PersonForm() {
           >
             <label></label>
           </div>
-          <div className="col-sm-2 form-control-sm">
+          <div className="col-sm-2">
             <button
               type="submit"
               className="btn btn-success btn-sm form-control-sm"
@@ -188,11 +194,41 @@ function PersonForm() {
                 {item.givenName}
               </div>
               <div className="col-sm-2 col-form-label col-form-label-sm">
-                <div className="row">
-                  {loading ? (
-                    <div>loading...</div>
-                  ) : (
-                    confidence
+                {predicate === "all" ? (
+                  <div>
+                    <div className="row">
+                      {confidence
+                        .filter(
+                          (c) =>
+                            c.givenName === item.givenName && c.wiki === "true"
+                        )
+                        .map((result) => {
+                          if (result.confidence > 0) {
+                            nameConfidencePerRow += parseFloat(
+                              result.confidence
+                            );
+                          }
+                          return result.givenName;
+                        })}
+                    </div>
+                    <div className="row">
+                      {confidence
+                        .filter(
+                          (c) => c.dob === item.birthDate && c.wiki === "true"
+                        )
+                        .map((result) => {
+                          if (result.confidence > 0) {
+                            dobConfidencePerRow += parseFloat(
+                              result.confidence
+                            );
+                          }
+                          return result.dob;
+                        })}
+                    </div>
+                  </div>
+                ) : predicate === "name" ? (
+                  <div className="row">
+                    {confidence
                       .filter(
                         (c) =>
                           c.givenName === item.givenName && c.wiki === "true"
@@ -202,15 +238,11 @@ function PersonForm() {
                           nameConfidencePerRow += parseFloat(result.confidence);
                         }
                         return result.givenName;
-                      })
-                  )}
-                </div>
-
-                <div className="row">
-                  {loading ? (
-                    <div>loading...</div>
-                  ) : (
-                    confidence
+                      })}
+                  </div>
+                ) : (
+                  <div className="row">
+                    {confidence
                       .filter(
                         (c) => c.dob === item.birthDate && c.wiki === "true"
                       )
@@ -219,16 +251,48 @@ function PersonForm() {
                           dobConfidencePerRow += parseFloat(result.confidence);
                         }
                         return result.dob;
-                      })
-                  )}
-                </div>
+                      })}
+                  </div>
+                )}
               </div>
               <div className="col-sm-2 col-form-label col-form-label-sm">
-                <div className="row">
-                  {loading ? (
-                    <div>loading...</div>
-                  ) : (
-                    confidence
+                {predicate === "all" ? (
+                  <div>
+                    <div className="row">
+                      {confidence
+                        .filter(
+                          (c) =>
+                            c.givenName === item.givenName &&
+                            c.dbpedia === "true"
+                        )
+                        .map((result) => {
+                          if (result.confidence > 0) {
+                            nameConfidencePerRow += parseFloat(
+                              result.confidence
+                            );
+                          }
+                          return result.givenName;
+                        })}
+                    </div>
+                    <div className="row">
+                      {confidence
+                        .filter(
+                          (c) =>
+                            c.dob === item.birthDate && c.dbpedia === "true"
+                        )
+                        .map((result) => {
+                          if (result.confidence > 0) {
+                            dobConfidencePerRow += parseFloat(
+                              result.confidence
+                            );
+                          }
+                          return result.dob;
+                        })}
+                    </div>
+                  </div>
+                ) : predicate === "name" ? (
+                  <div className="row">
+                    {confidence
                       .filter(
                         (c) =>
                           c.givenName === item.givenName && c.dbpedia === "true"
@@ -238,14 +302,11 @@ function PersonForm() {
                           nameConfidencePerRow += parseFloat(result.confidence);
                         }
                         return result.givenName;
-                      })
-                  )}
-                </div>
-                <div className="row">
-                  {loading ? (
-                    <div>loading...</div>
-                  ) : (
-                    confidence
+                      })}
+                  </div>
+                ) : (
+                  <div className="row">
+                    {confidence
                       .filter(
                         (c) => c.dob === item.birthDate && c.dbpedia === "true"
                       )
@@ -254,9 +315,9 @@ function PersonForm() {
                           dobConfidencePerRow += parseFloat(result.confidence);
                         }
                         return result.dob;
-                      })
-                  )}
-                </div>
+                      })}
+                  </div>
+                )}
               </div>
               <div className="col-sm-2 col-form-label col-form-label-sm">
                 <div className="row">
@@ -268,7 +329,9 @@ function PersonForm() {
                       color: "blue",
                     }}
                   >
-                    {loading ? <div>loading...</div> : nameConfidencePerRow}
+                    {predicate === "all" || predicate === "name"
+                      ? nameConfidencePerRow
+                      : ""}
                   </div>
                 </div>
                 <div className="row">
@@ -280,7 +343,9 @@ function PersonForm() {
                       color: "red",
                     }}
                   >
-                    {loading ? <div>loading...</div> : dobConfidencePerRow}
+                    {predicate === "all" || predicate === "dob"
+                      ? dobConfidencePerRow
+                      : ""}
                   </div>
                 </div>
               </div>
@@ -293,9 +358,13 @@ function PersonForm() {
                   color: "green",
                 }}
               >
-                {(parseFloat(nameConfidencePerRow) +
-                  parseFloat(dobConfidencePerRow)) /
-                  2}
+                {predicate === "all"
+                  ? (parseFloat(nameConfidencePerRow) +
+                      parseFloat(dobConfidencePerRow)) /
+                    2
+                  : predicate === "name"
+                  ? parseFloat(nameConfidencePerRow)
+                  : parseFloat(dobConfidencePerRow)}
               </div>
             </div>
           );
