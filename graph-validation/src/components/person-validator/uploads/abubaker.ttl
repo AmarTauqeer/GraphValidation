@@ -1,0 +1,54 @@
+@base          <file:///home/elwin/Desktop/VAL2/tarql-1.2/query.sparql> .
+@prefix so:  <http://schema.org/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://example.com/ns#307>
+        rdf:type       so:Person ;
+        so:name        "Abraham Lincoln" ;
+        so:birthDate   "1809" ;
+        so:birthPlace  <http://example.com/ns#Hodgenville> .
+
+<http://example.com/ns#Hodgenville>
+        rdf:type  so:Place ;
+        so:name  "Hodgenville" .
+
+<http://example.com/ns#308>
+        rdf:type       so:Person ;
+        so:name        "Aristotle" ;
+        so:birthDate   "-384" ;
+        so:birthPlace  <http://example.com/ns#Stageira> .
+
+<http://example.com/ns#Stageira>
+        rdf:type  so:Place ;
+        so:name  "Stageira" .
+
+<http://example.com/ns#339>
+        rdf:type       so:Person ;
+        so:name        "Ayn Rand" ;
+        so:birthDate   "1905" ;
+        so:birthPlace  <http://example.com/ns#Saint%20Petersburg> .
+
+<http://example.com/ns#Saint%20Petersburg>
+        rdf:type  so:Place ;
+        so:name  "Saint Petersburg" .
+
+<http://example.com/ns#595>
+        rdf:type       so:Person ;
+        so:name        "Andre Agassi" ;
+        so:birthDate   "1970" ;
+        so:birthPlace  <http://example.com/ns#Las%20Vegas> .
+
+<http://example.com/ns#Las%20Vegas>
+        rdf:type  so:Place ;
+        so:name  "Las Vegas" .
+
+<http://example.com/ns#628>
+        rdf:type       so:Person ;
+        so:name        "Aldous Huxley" ;
+        so:birthDate   "1894" ;
+        so:birthPlace  <http://example.com/ns#Godalming> .
+
+<http://example.com/ns#Godalming>
+        rdf:type  so:Place ;
+        so:name  "Godalming" .
+

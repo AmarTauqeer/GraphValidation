@@ -42,7 +42,47 @@ function PersonForm() {
           weightWiki,
           weightDbPedia
         );
+        // create txt file with result
+        const textFile = (result) => {
+          const element = document.createElement("a");
+          function textToSave() {
+            let results =
+              "@prefix so:  <http://schema.org/> .\n" +
+              "@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n" +
+              "@prefix dbpedia: <http://dbpedia.org/resource/> .\n\n";
+
+            for (let i = 0; i < result.length; i++) {
+              const element = result[i];
+
+              let data =
+                element["person"].concat(
+                  "    " + "so:name" + "  " + `"${element["givenName"]}"\n`
+                ) +
+                element["person"].concat(
+                  "    " + "so:birthDate" + "  " + `"${element["dob"]}"\n`
+                ) +
+                element["person"].concat(
+                  "    " + "confidence" + "  " + element["confidence"] + "\n\n"
+                );
+              console.log(data);
+
+              results += data;
+            }
+            return results;
+          }
+
+          file = new Blob([textToSave()], { type: "text/plain" });
+
+          element.href = URL.createObjectURL(file);
+
+          element.download = "dataset-results.ttl";
+          document.body.appendChild(element); // Required for this to work in FireFox
+          element.click();
+        };
+
         if (confidence) {
+          // create text file
+          textFile(confidence);
           setConfidence(confidence);
           setLoading(false);
         }
@@ -153,7 +193,7 @@ function PersonForm() {
               type="submit"
               className="btn btn-success btn-sm form-control-sm"
             >
-              Validate
+              Validate & download
             </button>
           </div>
         </div>
@@ -166,16 +206,16 @@ function PersonForm() {
           fontSize: "16px",
         }}
       >
-        <div className="col-sm-3 col-form-label col-form-label-sm my-auto">
+        <div className="col-sm-2 col-form-label col-form-label-sm my-auto">
           <b>KG</b>
         </div>
-        <div className="col-sm-2 col-form-label col-form-label-sm my-auto">
+        <div className="col-sm-4 col-form-label col-form-label-sm my-auto">
           <b>Wiki</b>
         </div>
-        <div className="col-sm-2 col-form-label col-form-label-sm my-auto">
+        <div className="col-sm-4 col-form-label col-form-label-sm my-auto">
           <b>DbPedia</b>
         </div>
-        <div className="col-sm-2 col-form-label col-form-label-sm my-auto">
+        <div className="col-sm-1 col-form-label col-form-label-sm my-auto">
           <b>Confidence</b>
         </div>
         <div className="col-sm-1 col-form-label col-form-label-sm my-auto">
@@ -190,10 +230,10 @@ function PersonForm() {
           let dobConfidencePerRow = 0.0;
           return (
             <div className="row" key={index}>
-              <div className="col-sm-3 col-form-label col-form-label-sm">
+              <div className="col-sm-2 col-form-label col-form-label-sm">
                 {item.givenName}
               </div>
-              <div className="col-sm-2 col-form-label col-form-label-sm">
+              <div className="col-sm-4 col-form-label col-form-label-sm">
                 {predicate === "all" ? (
                   <div>
                     <div className="row">
@@ -208,13 +248,16 @@ function PersonForm() {
                               result.confidence
                             );
                           }
-                          return result.givenName;
+                          return result.person;
                         })}
                     </div>
                     <div className="row">
                       {confidence
                         .filter(
-                          (c) => c.dob === item.birthDate && c.wiki === "true"
+                          (c) =>
+                            c.dob === item.birthDate &&
+                            c.wiki === "true" &&
+                            c.givenName === item.givenName
                         )
                         .map((result) => {
                           if (result.confidence > 0) {
@@ -237,14 +280,17 @@ function PersonForm() {
                         if (result.confidence > 0) {
                           nameConfidencePerRow += parseFloat(result.confidence);
                         }
-                        return result.givenName;
+                        return result.person;
                       })}
                   </div>
                 ) : (
                   <div className="row">
                     {confidence
                       .filter(
-                        (c) => c.dob === item.birthDate && c.wiki === "true"
+                        (c) =>
+                          c.dob === item.birthDate &&
+                          c.wiki === "true" &&
+                          c.givenName === item.givenName
                       )
                       .map((result) => {
                         if (result.confidence > 0) {
@@ -255,7 +301,7 @@ function PersonForm() {
                   </div>
                 )}
               </div>
-              <div className="col-sm-2 col-form-label col-form-label-sm">
+              <div className="col-sm-4 col-form-label col-form-label-sm">
                 {predicate === "all" ? (
                   <div>
                     <div className="row">
@@ -271,14 +317,17 @@ function PersonForm() {
                               result.confidence
                             );
                           }
-                          return result.givenName;
+                          return result.person;
                         })}
                     </div>
+
                     <div className="row">
                       {confidence
                         .filter(
                           (c) =>
-                            c.dob === item.birthDate && c.dbpedia === "true"
+                            c.dob === item.birthDate &&
+                            c.dbpedia === "true" &&
+                            c.givenName === item.givenName
                         )
                         .map((result) => {
                           if (result.confidence > 0) {
@@ -301,14 +350,17 @@ function PersonForm() {
                         if (result.confidence > 0) {
                           nameConfidencePerRow += parseFloat(result.confidence);
                         }
-                        return result.givenName;
+                        return result.person;
                       })}
                   </div>
                 ) : (
                   <div className="row">
                     {confidence
                       .filter(
-                        (c) => c.dob === item.birthDate && c.dbpedia === "true"
+                        (c) =>
+                          c.dob === item.birthDate &&
+                          c.dbpedia === "true" &&
+                          c.givenName === item.givenName
                       )
                       .map((result) => {
                         if (result.confidence > 0) {
@@ -319,7 +371,7 @@ function PersonForm() {
                   </div>
                 )}
               </div>
-              <div className="col-sm-2 col-form-label col-form-label-sm">
+              <div className="col-sm-1 col-form-label col-form-label-sm">
                 <div className="row">
                   <div
                     className="col-sm-10"

@@ -15,8 +15,8 @@ class RdfGraph(MethodResource, Resource):
         ex = Namespace("http://example.org/ns#")
         g.bind("ex", ex)
         # g.parse(data=my_data, format="n3")
-        g.parse(file=inputFile, format="n3")
-        # print(g.serialize(format="turtle").decode("utf-8"))
+        g.parse(file=inputFile, format="ttl")
+        #print(g.serialize(format="turtle").decode("utf-8"))
         qres = g.query(
             """
             prefix ex: <http://example.org/ns#>
@@ -24,21 +24,24 @@ class RdfGraph(MethodResource, Resource):
             prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             prefix schema: <http://schema.org/>
             prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-            SELECT ?givenName ?birthDate ?placeOfBirth
+            SELECT ?a ?givenName ?birthDate ?placeOfBirth
                         WHERE {
                         ?a a schema:Person;
-                            schema:givenName ?givenName;
+                            schema:name ?givenName;
                             schema:birthDate ?birthDate;
-                            schema:placeOfBirth ?placeOfBirth;
+                            schema:birthPlace ?pob.
+                            ?pob rdf:type schema:Place;
+                                    schema:name ?placeOfBirth .
         }""")
         for row in qres:
-            # print("{}{}{}".format(row.givenName, row.birthDate, row.placeOfBirth))
+            print("{}{}{}".format(row.givenName, row.birthDate, row.placeOfBirth))
             gname = "{}".format(row.givenName)
             bdate = "{}".format(row.birthDate)
             pobirth = "{}".format(row.placeOfBirth)
             data = {
                 'givenName': gname, 'birthDate': bdate, 'placeOfBirth': pobirth
             }
+            #print(data)
             param_array.append(data)
-        # print(param_array)
+        #print(param_array)
         return jsonify({'graph_data': param_array})

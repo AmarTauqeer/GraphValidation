@@ -1,34 +1,24 @@
-@prefix ex: <http://example.org/ns#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <http://schema.org/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-ex:Gilbert
-    a schema:Person ;
-    schema:givenName "Gilbert N. Lewis" ;
-    schema:familyName "Junior" ;
-    schema:birthDate "1875-10-25"^^xsd:date ;
-    schema:placeOfBirth "Weymouth,_Massachusetts" ;
-    schema:address ex:AgustínsAddress .
-ex:James
-    a schema:Person ;
-    schema:givenName "James Brown" ;
-    schema:familyName "Junior" ;
-    schema:birthDate "1933-05-03"^^xsd:date ;
-    schema:placeOfBirth "Barnwell,_South_Carolina" .
-ex:Margaret
-    a schema:Person ;
-    schema:givenName "Margaret Mitchell" ;
-    schema:familyName "Junior" ;
-    schema:birthDate "1900-11-08"^^xsd:date ;
-    schema:placeOfBirth "Louisiana" ;
-    schema:address ex:BrucesAddress .
-ex:Robert
-    a schema:Person ;
-    schema:givenName "Robert Noyce" ;
-    schema:familyName "Junior" ;
-    schema:birthDate "1927-12-12"^^xsd:date ;
-    schema:placeOfBirth "Louisiana" ;
-    schema:address ex:BrucesAddress .
+@base          <file:///home/elwin/Desktop/VAL2/tarql-1.2/query.sparql> .
+@prefix so:  <http://schema.org/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
+<http://example.com/ns#307>
+        rdf:type       so:Person ;
+        so:name        "Abraham Lincoln" ;
+        so:birthDate   "1809" ;
+        so:birthPlace  <http://example.com/ns#Hodgenville> .
+
+<http://example.com/ns#Hodgenville>
+        rdf:type  so:Place ;
+        so:name  "Hodgenville" .
+
+<http://example.com/ns#339>
+        rdf:type       so:Person ;
+        so:name        "Ayn Rand" ;
+        so:birthDate   "1905" ;
+        so:birthPlace  <http://example.com/ns#Saint%20Petersburg> .
+
+<http://example.com/ns#Saint%20Petersburg>
+        rdf:type  so:Place ;
+        so:name  "Saint Petersburg" .
 
