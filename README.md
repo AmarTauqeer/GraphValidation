@@ -34,6 +34,14 @@ run command in windows: pip install -r requirements.txt
 
 run command in windows: python -m flask-run
 
+run command in linux: python3 -m venv venv
+
+run command in linux: source venv/bin/activate
+
+run command in linux: pip install -r requirements.txt
+
+run command in linux: python -m flask-run
+
 
 ### live Demo
 

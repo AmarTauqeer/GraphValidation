@@ -1,4 +1,5 @@
 import os
+import requests
 from rdflib import URIRef, BNode, Literal, Namespace, Graph
 # from rdflib.namespace import FOAF, DCTERMS, XSD, RDF, RDFS, SDO
 from flask_restful import Resource
@@ -16,7 +17,7 @@ class RdfGraph(MethodResource, Resource):
         g.bind("ex", ex)
         # g.parse(data=my_data, format="n3")
         g.parse(file=inputFile, format="ttl")
-        #print(g.serialize(format="turtle").decode("utf-8"))
+        # print(g.serialize(format="turtle").decode("utf-8"))
         qres = g.query(
             """
             prefix ex: <http://example.org/ns#>
@@ -41,7 +42,7 @@ class RdfGraph(MethodResource, Resource):
             data = {
                 'givenName': gname, 'birthDate': bdate, 'placeOfBirth': pobirth
             }
-            #print(data)
+            # print(data)
             param_array.append(data)
-        #print(param_array)
+        # print(param_array)
         return jsonify({'graph_data': param_array})
