@@ -10,7 +10,7 @@ const computeConfidence = (data, weightWiki, weightDbPedia) => {
       let data = {
         givenName: element.givenName,
         dob: element.dob,
-        uriId:element.uriId,
+        uriId: element.uriId,
         //placeOfBirth: element.placeOfBirth,
         confidence: weightWiki,
         wiki: "true",
@@ -24,7 +24,7 @@ const computeConfidence = (data, weightWiki, weightDbPedia) => {
       let data = {
         givenName: element.givenName,
         dob: element.dob,
-        uriId:element.uriId,
+        uriId: element.uriId,
         //placeOfBirth: element.placeOfBirth,
         confidence: weightDbPedia,
         wiki: "false",
@@ -37,6 +37,23 @@ const computeConfidence = (data, weightWiki, weightDbPedia) => {
   //console.log(confidence);
   return confidence;
 };
+// get confidence wiki name,dob plus dbpedia name,dob
+let wikiNameConfidenceTotal = 0;
+let wikiDobConfidenceTotal = 0;
+let dbPediaNameConfidenceTotal = 0;
+let dbPediaDobConfidenceTotal = 0;
+const getConfidenceTotals = () => {
+  let arr = [];
+  let data = {
+    wikiName: wikiNameConfidenceTotal,
+    wikiDob: wikiDobConfidenceTotal,
+    dbpediaName: dbPediaNameConfidenceTotal,
+    dbpediaDob: dbPediaDobConfidenceTotal,
+  };
+  arr.push(data);
+//  console.log(arr);
+  return arr;
+};
 const getData = async (graphData) => {
   let resp = graphData;
   let arr = [];
@@ -46,18 +63,31 @@ const getData = async (graphData) => {
       let givenName = resp[i].givenName;
       let birthDate = resp[i].birthDate;
       let placeOfBirth = resp[i].placeOfBirth;
-      let uriId=resp[i].uriId;
+      let uriId = resp[i].uriId;
 
       // get wiki data using sparql
-      const wikiData = await GetWikiData(givenName, birthDate, placeOfBirth,uriId);
+      const wikiData = await GetWikiData(
+        givenName,
+        birthDate,
+        placeOfBirth,
+        uriId
+      );
       if (wikiData.length > 0) {
-        let dateOfbirth = wikiData[0].year["value"];
+        // count name and birth date confidence
+        let wikiName = wikiData[0].personName["value"];
+        let wikiDob = wikiData[0].year["value"];
+
+        if (wikiName === givenName) {
+          wikiNameConfidenceTotal += 1;
+        }
+        if (wikiDob === birthDate) {
+          wikiDobConfidenceTotal += 1;
+        }
         arr = [
           ...arr,
           {
-            
-            givenName: wikiData[0].personName["value"],
-            dob: dateOfbirth,
+            givenName: wikiName,
+            dob: wikiDob,
             uriId,
             //dob: dateOfbirth.substring(0, 10),
             //placeOfBirth: wikiData[0].placeOfBirth["value"],
@@ -75,23 +105,36 @@ const getData = async (graphData) => {
         uriId
       );
       if (dbpediaData.length > 0) {
+        // count name and birth date confidence
+        let dbpediaName = dbpediaData[0].personName["value"];
+        let dbpediaDob = dbpediaData[0].year["value"];
+        let dbpediaPerson = dbpediaData[0].person["value"];
+        if (dbpediaName === givenName) {
+          dbPediaNameConfidenceTotal += 1;
+        }
+        if (dbpediaDob === birthDate) {
+          dbPediaDobConfidenceTotal += 1;
+        }
         //console.log(dbpediaData)
         arr = [
           ...arr,
           {
-            givenName: dbpediaData[0].personName["value"],
-            dob: dbpediaData[0].year["value"],
+            givenName: dbpediaName,
+            dob: dbpediaDob,
             uriId,
             //placeOfBirth: dbpediaData[0].birthPlace["value"],
             wiki_status: "",
             dbpedia_status: "found",
-            person: dbpediaData[0].person["value"],
+            person: dbpediaPerson,
           },
         ];
       }
     }
   }
+  getConfidenceTotals();
+  // console.log(dbPediaNameConfidenceTotal)
+  // console.log(dbPediaDobConfidenceTotal)
   return arr;
 };
 
-export { computeConfidence, getData };
+export { computeConfidence, getData, getConfidenceTotals };

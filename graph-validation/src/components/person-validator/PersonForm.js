@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { computeConfidence, getData } from "./person-helper-functions/index";
+import { computeConfidence, getConfidenceTotals, getData } from "./person-helper-functions/index";
 
 import axios from "axios";
 
@@ -11,6 +11,9 @@ function PersonForm() {
   const [selectedFile, setSelectedFile] = useState();
   const [loading, setLoading] = useState(false);
   const [predicate, setPredicate] = useState("all");
+
+  const [confidenceTotal, setConfidenceTotal] = useState([]);
+
   // submit handler
   const submitHandler = (e) => {
     e.preventDefault();
@@ -86,6 +89,8 @@ function PersonForm() {
           // create text file
           //textFile(confidence);
           setConfidence(confidence);
+          let arr=getConfidenceTotals
+          setConfidenceTotal(arr)
           setLoading(false);
         }
       });
@@ -108,7 +113,7 @@ function PersonForm() {
     return resp;
   };
 
-  // get result based on predicates
+   // get result based on predicates
   return (
     <div>
       <form onSubmit={submitHandler}>
@@ -224,12 +229,14 @@ function PersonForm() {
           <b>Instance Confidence</b>
         </div>
       </div>
+
       {loading ? (
         <div>loading...</div>
       ) : (
         graphData.map((item, index) => {
           let nameConfidencePerRow = 0.0;
           let dobConfidencePerRow = 0.0;
+
           return (
             <div className="row" key={index}>
               <div className="col-sm-2 col-form-label col-form-label-sm">
@@ -242,7 +249,9 @@ function PersonForm() {
                       {confidence
                         .filter(
                           (c) =>
-                            c.givenName === item.givenName && c.wiki === "true" && c.uriId ===item.uriId
+                            c.givenName === item.givenName &&
+                            c.wiki === "true" &&
+                            c.uriId === item.uriId
                         )
                         .map((result) => {
                           if (result.confidence > 0) {
@@ -258,7 +267,8 @@ function PersonForm() {
                         .filter(
                           (c) =>
                             c.dob === item.birthDate &&
-                            c.wiki === "true" && c.uriId ===item.uriId
+                            c.wiki === "true" &&
+                            c.uriId === item.uriId
                         )
                         .map((result) => {
                           if (result.confidence > 0) {
@@ -275,7 +285,9 @@ function PersonForm() {
                     {confidence
                       .filter(
                         (c) =>
-                          c.givenName === item.givenName && c.wiki === "true" && c.uriId ===item.uriId
+                          c.givenName === item.givenName &&
+                          c.wiki === "true" &&
+                          c.uriId === item.uriId
                       )
                       .map((result) => {
                         if (result.confidence > 0) {
@@ -290,7 +302,8 @@ function PersonForm() {
                       .filter(
                         (c) =>
                           c.dob === item.birthDate &&
-                          c.wiki === "true" && c.uriId ===item.uriId
+                          c.wiki === "true" &&
+                          c.uriId === item.uriId
                       )
                       .map((result) => {
                         if (result.confidence > 0) {
@@ -309,7 +322,8 @@ function PersonForm() {
                         .filter(
                           (c) =>
                             c.givenName === item.givenName &&
-                            c.dbpedia === "true" && c.uriId ===item.uriId
+                            c.dbpedia === "true" &&
+                            c.uriId === item.uriId
                         )
                         .map((result) => {
                           if (result.confidence > 0) {
@@ -326,7 +340,8 @@ function PersonForm() {
                         .filter(
                           (c) =>
                             c.dob === item.birthDate &&
-                            c.dbpedia === "true" && c.uriId ===item.uriId
+                            c.dbpedia === "true" &&
+                            c.uriId === item.uriId
                         )
                         .map((result) => {
                           if (result.confidence > 0) {
@@ -343,7 +358,9 @@ function PersonForm() {
                     {confidence
                       .filter(
                         (c) =>
-                          c.givenName === item.givenName && c.dbpedia === "true" && c.uriId ===item.uriId
+                          c.givenName === item.givenName &&
+                          c.dbpedia === "true" &&
+                          c.uriId === item.uriId
                       )
                       .map((result) => {
                         if (result.confidence > 0) {
@@ -358,7 +375,8 @@ function PersonForm() {
                       .filter(
                         (c) =>
                           c.dob === item.birthDate &&
-                          c.dbpedia === "true" && c.uriId ===item.uriId
+                          c.dbpedia === "true" &&
+                          c.uriId === item.uriId
                       )
                       .map((result) => {
                         if (result.confidence > 0) {
@@ -420,6 +438,26 @@ function PersonForm() {
           );
         })
       )}
+      <div>
+        <hr />
+        <div className="row">
+        <div className="col-md-3"><b>Wiki Name Confidence Total</b></div>
+        <div className="col-md-3"><b>Wiki Dob Confidence Total</b></div>
+        <div className="col-md-3"><b>Dbpedia Name Confidence Total</b></div>
+        <div className="col-md-3"><b>Dbpedia Dob Confidence Total</b></div>
+        </div>
+        {confidenceTotal.map((item,index)=>{
+          return(
+            <div className="row" key={index}>
+              <div className="col-md-3" style={{textAlign:'center'}}><b>{item.wikiName}</b></div>
+              <div className="col-md-3" style={{textAlign:'center'}}><b>{item.wikiDob}</b></div>
+              <div className="col-md-3" style={{textAlign:'center'}}><b>{item.dbpediaName}</b></div>
+              <div className="col-md-3" style={{textAlign:'center'}}><b>{item.dbpediaDob}</b></div>
+            </div>
+          )
+        })}
+        <hr />
+      </div>
     </div>
   );
 }

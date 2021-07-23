@@ -6,7 +6,7 @@ const GetDbPediaData = async (givenName, birthDate, placeOfBirth) => {
   // var sparqlQuery = `PREFIX so: <http://schema.org/>
   // select ?person ?personName (substr(?birthDate,1,4) as ?year)
   // from named <http://dbpedia.org/>
-  // where { 
+  // where {
   //     GRAPH ?g {
   //     ?person a so:Person;
   //          so:name ?personName;
@@ -29,7 +29,7 @@ const GetDbPediaData = async (givenName, birthDate, placeOfBirth) => {
   const queryDispatcherWiki = new GetDataFromDbPedia(endpointUrl);
   await queryDispatcherWiki.query(sparqlQuery).then((res) => {
     if (res) {
-      //console.log(res)
+      //      console.log(res)
       Data = res.results.bindings;
     }
   });
