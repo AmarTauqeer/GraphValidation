@@ -10,10 +10,12 @@ const computeConfidence = (data, weightWiki, weightDbPedia) => {
       let data = {
         givenName: element.givenName,
         dob: element.dob,
+        uriId:element.uriId,
         //placeOfBirth: element.placeOfBirth,
         confidence: weightWiki,
         wiki: "true",
         dbpedia: "false",
+        person: element.person,
       };
       confidence.push(data);
     }
@@ -22,6 +24,7 @@ const computeConfidence = (data, weightWiki, weightDbPedia) => {
       let data = {
         givenName: element.givenName,
         dob: element.dob,
+        uriId:element.uriId,
         //placeOfBirth: element.placeOfBirth,
         confidence: weightDbPedia,
         wiki: "false",
@@ -43,21 +46,24 @@ const getData = async (graphData) => {
       let givenName = resp[i].givenName;
       let birthDate = resp[i].birthDate;
       let placeOfBirth = resp[i].placeOfBirth;
+      let uriId=resp[i].uriId;
 
       // get wiki data using sparql
-      const wikiData = await GetWikiData(givenName, birthDate, placeOfBirth);
+      const wikiData = await GetWikiData(givenName, birthDate, placeOfBirth,uriId);
       if (wikiData.length > 0) {
         let dateOfbirth = wikiData[0].year["value"];
         arr = [
           ...arr,
           {
-            givenName,
-            //givenName: wikiData[0].birthName["value"],
+            
+            givenName: wikiData[0].personName["value"],
             dob: dateOfbirth,
+            uriId,
             //dob: dateOfbirth.substring(0, 10),
             //placeOfBirth: wikiData[0].placeOfBirth["value"],
             wiki_status: "found",
             dbpedia_status: "",
+            person: wikiData[0].person["value"],
           },
         ];
       }
@@ -65,14 +71,17 @@ const getData = async (graphData) => {
       const dbpediaData = await GetDbPediaData(
         givenName,
         birthDate,
-        placeOfBirth
+        placeOfBirth,
+        uriId
       );
       if (dbpediaData.length > 0) {
+        //console.log(dbpediaData)
         arr = [
           ...arr,
           {
-            givenName: dbpediaData[0].name["value"],
-            dob: dbpediaData[0].birthDate["value"],
+            givenName: dbpediaData[0].personName["value"],
+            dob: dbpediaData[0].year["value"],
+            uriId,
             //placeOfBirth: dbpediaData[0].birthPlace["value"],
             wiki_status: "",
             dbpedia_status: "found",

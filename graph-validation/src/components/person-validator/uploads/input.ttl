@@ -1,24 +1,2049 @@
-@base          <file:///home/elwin/Desktop/VAL2/tarql-1.2/query.sparql> .
-@prefix so:  <http://schema.org/> .
-@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix mapper: <http://www.ontotext.com/mapper/> .
+@prefix so: <http://schema.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf4j: <http://rdf4j.org/schema/rdf4j#> .
+@prefix sesame: <http://www.openrdf.org/schema/sesame#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
 
-<http://example.com/ns#307>
-        rdf:type       so:Person ;
-        so:name        "Abraham Lincoln" ;
-        so:birthDate   "1809" ;
-        so:birthPlace  <http://example.com/ns#Hodgenville> .
+<https://www.example.org/resource/307> a so:Person;
+  so:name "Abraham Lincoln";
+  so:birthDate "1809" .
 
-<http://example.com/ns#Hodgenville>
-        rdf:type  so:Place ;
-        so:name  "Hodgenville" .
+<https://www.example.org/resource/841> a so:Person;
+  so:name "Attila the Hun";
+  so:birthDate "406" .
 
-<http://example.com/ns#339>
-        rdf:type       so:Person ;
-        so:name        "Ayn Rand" ;
-        so:birthDate   "1905" ;
-        so:birthPlace  <http://example.com/ns#Saint%20Petersburg> .
+<https://www.example.org/resource/868> a so:Person;
+  so:name "Alp Arslan";
+  so:birthDate "1029" .
 
-<http://example.com/ns#Saint%20Petersburg>
-        rdf:type  so:Place ;
-        so:name  "Saint Petersburg" .
+<https://www.example.org/resource/1235> a so:Person;
+  so:name "Alexander Mackenzie";
+  so:birthDate "1822" .
 
+<https://www.example.org/resource/1239> a so:Person;
+  so:name "Ashoka";
+  so:birthDate "-304" .
+
+<https://www.example.org/resource/1256> a so:Person;
+  so:name "Antoninus Pius";
+  so:birthDate "86" .
+
+<https://www.example.org/resource/1273> a so:Person;
+  so:name "Augustus";
+  so:birthDate "-63" .
+
+<https://www.example.org/resource/1389> a so:Person;
+  so:name "Ahab";
+  so:birthDate "-900" .
+
+<https://www.example.org/resource/1527> a so:Person;
+  so:name "Ahmed I";
+  so:birthDate "1590" .
+
+<https://www.example.org/resource/1528> a so:Person;
+  so:name "Ahmed II";
+  so:birthDate "1643" .
+
+<https://www.example.org/resource/1529> a so:Person;
+  so:name "Ahmed III";
+  so:birthDate "1673" .
+
+<https://www.example.org/resource/1550> a so:Person;
+  so:name "Agesilaus II";
+  so:birthDate "-444" .
+
+<https://www.example.org/resource/1557> a so:Person;
+  so:name "Agrippina the Younger";
+  so:birthDate "15" .
+
+<https://www.example.org/resource/1560> a so:Person;
+  so:name "Ahmed Shah Abdali";
+  so:birthDate "1722" .
+
+<https://www.example.org/resource/1570> a so:Person;
+  so:name "Alaric I";
+  so:birthDate "370" .
+
+<https://www.example.org/resource/1571> a so:Person;
+  so:name "Alaric II";
+  so:birthDate "450" .
+
+<https://www.example.org/resource/1575> a so:Person;
+  so:name "Alboin";
+  so:birthDate "530" .
+
+<https://www.example.org/resource/1586> a so:Person;
+  so:name "Alexander Balas";
+  so:birthDate "-200" .
+
+<https://www.example.org/resource/1591> a so:Person;
+  so:name "Alexander II of Russia";
+  so:birthDate "1818" .
+
+<https://www.example.org/resource/1592> a so:Person;
+  so:name "Alexander III of Russia";
+  so:birthDate "1845" .
+
+<https://www.example.org/resource/1593> a so:Person;
+  so:name "Alexander I of Scotland";
+  so:birthDate "1078" .
+
+<https://www.example.org/resource/1594> a so:Person;
+  so:name "Alexander II of Scotland";
+  so:birthDate "1198" .
+
+<https://www.example.org/resource/1595> a so:Person;
+  so:name "Alexander I of Serbia";
+  so:birthDate "1876" .
+
+<https://www.example.org/resource/1596> a so:Person;
+  so:name "Alexander III of Scotland";
+  so:birthDate "1241" .
+
+<https://www.example.org/resource/1600> a so:Person;
+  so:name "Alexander Severus";
+  so:birthDate "208" .
+
+<https://www.example.org/resource/1613> a so:Person;
+  so:name "Alexios I Komnenos";
+  so:birthDate "1048" .
+
+<https://www.example.org/resource/1615> a so:Person;
+  so:name "Alexios II Komnenos";
+  so:birthDate "1169" .
+
+<https://www.example.org/resource/1616> a so:Person;
+  so:name "Alexios III Angelos";
+  so:birthDate "1153" .
+
+<https://www.example.org/resource/1617> a so:Person;
+  so:name "Alexios V";
+  so:birthDate "1150" .
+
+<https://www.example.org/resource/1623> a so:Person;
+  so:name "Andrew Jackson";
+  so:birthDate "1767" .
+
+<https://www.example.org/resource/1624> a so:Person;
+  so:name "Andrew Johnson";
+  so:birthDate "1808" .
+
+<https://www.example.org/resource/1640> a so:Person;
+  so:name "Alfred the Great";
+  so:birthDate "849" .
+
+<https://www.example.org/resource/1652> a so:Person;
+  so:name "Alyattes II";
+  so:birthDate "-619" .
+
+<https://www.example.org/resource/1657> a so:Person;
+  so:name "Afonso I of Portugal";
+  so:birthDate "1109" .
+
+<https://www.example.org/resource/1658> a so:Person;
+  so:name "Afonso II of Portugal";
+  so:birthDate "1185" .
+
+<https://www.example.org/resource/1659> a so:Person;
+  so:name "Afonso III of Portugal";
+  so:birthDate "1210" .
+
+<https://www.example.org/resource/1660> a so:Person;
+  so:name "Afonso IV of Portugal";
+  so:birthDate "1291" .
+
+<https://www.example.org/resource/1661> a so:Person;
+  so:name "Afonso V of Portugal";
+  so:birthDate "1432" .
+
+<https://www.example.org/resource/1676> a so:Person;
+  so:name "Alfonso XII of Spain";
+  so:birthDate "1857" .
+
+<https://www.example.org/resource/1677> a so:Person;
+  so:name "Alfonso XIII of Spain";
+  so:birthDate "1886" .
+
+<https://www.example.org/resource/1686> a so:Person;
+  so:name "Alfonso V of Aragon";
+  so:birthDate "1396" .
+
+<https://www.example.org/resource/1698> a so:Person;
+  so:name "Ambiorix";
+  so:birthDate "-100" .
+
+<https://www.example.org/resource/1749> a so:Person;
+  so:name "Ancus Marcius";
+  so:birthDate "-700" .
+
+<https://www.example.org/resource/1755> a so:Person;
+  so:name "Andrew II of Hungary";
+  so:birthDate "1177" .
+
+<https://www.example.org/resource/1760> a so:Person;
+  so:name "Andronikos III Palaiologos";
+  so:birthDate "1297" .
+
+<https://www.example.org/resource/1761> a so:Person;
+  so:name "Andronikos II Palaiologos";
+  so:birthDate "1259" .
+
+<https://www.example.org/resource/1762> a so:Person;
+  so:name "Andronikos I Komnenos";
+  so:birthDate "1118" .
+
+<https://www.example.org/resource/1840> a so:Person;
+  so:name "Agathocles of Syracuse";
+  so:birthDate "-361" .
+
+<https://www.example.org/resource/2151> a so:Person;
+  so:name "Anton Drexler";
+  so:birthDate "1884" .
+
+<https://www.example.org/resource/2176> a so:Person;
+  so:name "Ahmed Shah Massoud";
+  so:birthDate "1953" .
+
+<https://www.example.org/resource/2180> a so:Person;
+  so:name "Arcadius";
+  so:birthDate "370" .
+
+<https://www.example.org/resource/2425> a so:Person;
+  so:name "Aurangzeb";
+  so:birthDate "1618" .
+
+<https://www.example.org/resource/2510> a so:Person;
+  so:name "Arnulf of Carinthia, Holy Roman Emperor";
+  so:birthDate "850" .
+
+<https://www.example.org/resource/2543> a so:Person;
+  so:name "Alexander Kerensky";
+  so:birthDate "1881" .
+
+<https://www.example.org/resource/2609> a so:Person;
+  so:name "Abbas II of Egypt";
+  so:birthDate "1874" .
+
+<https://www.example.org/resource/2676> a so:Person;
+  so:name "Abd ar-Rahman I";
+  so:birthDate "731" .
+
+<https://www.example.org/resource/2678> a so:Person;
+  so:name "Abd-ar-Rahman III";
+  so:birthDate "912" .
+
+<https://www.example.org/resource/2681> a so:Person;
+  so:name "Abdülâziz";
+  so:birthDate "1830" .
+
+<https://www.example.org/resource/2692> a so:Person;
+  so:name "‘Abdu’l-Hamid I";
+  so:birthDate "1725" .
+
+<https://www.example.org/resource/2695> a so:Person;
+  so:name "Abdur Rahman Khan";
+  so:birthDate "1844" .
+
+<https://www.example.org/resource/2944> a so:Person;
+  so:name "Ariel Sharon";
+  so:birthDate "1928" .
+
+<https://www.example.org/resource/3356> a so:Person;
+  so:name "Bill Clinton";
+  so:birthDate "1946" .
+
+<https://www.example.org/resource/3875> a so:Person;
+  so:name "Benjamin Disraeli, 1st Earl of Beaconsfield";
+  so:birthDate "1804" .
+
+<https://www.example.org/resource/4241> a so:Person;
+  so:name "Bayezid I";
+  so:birthDate "1354" .
+
+<https://www.example.org/resource/4242> a so:Person;
+  so:name "Bayezid II";
+  so:birthDate "1447" .
+
+<https://www.example.org/resource/4463> a so:Person;
+  so:name "Babrak Karmal";
+  so:birthDate "1929" .
+
+<https://www.example.org/resource/4517> a so:Person;
+  so:name "Boudica";
+  so:birthDate "1" .
+
+<https://www.example.org/resource/4551> a so:Person;
+  so:name "Babur";
+  so:birthDate "1483" .
+
+<https://www.example.org/resource/4611> a so:Person;
+  so:name "Burhanuddin Rabbani";
+  so:birthDate "1940" .
+
+<https://www.example.org/resource/5314> a so:Person;
+  so:name "Charlemagne";
+  so:birthDate "742" .
+
+<https://www.example.org/resource/5766> a so:Person;
+  so:name "Clement Attlee";
+  so:birthDate "1883" .
+
+<https://www.example.org/resource/6046> a so:Person;
+  so:name "Cicero";
+  so:birthDate "-106" .
+
+<https://www.example.org/resource/6140> a so:Person;
+  so:name "Claudius";
+  so:birthDate "-10" .
+
+<https://www.example.org/resource/6195> a so:Person;
+  so:name "Calvin Coolidge";
+  so:birthDate "1872" .
+
+<https://www.example.org/resource/6746> a so:Person;
+  so:name "Constantius II";
+  so:birthDate "317" .
+
+<https://www.example.org/resource/6747> a so:Person;
+  so:name "Constans";
+  so:birthDate "320" .
+
+<https://www.example.org/resource/6852> a so:Person;
+  so:name "Caligula";
+  so:birthDate "12" .
+
+<https://www.example.org/resource/7234> a so:Person;
+  so:name "Constantine II";
+  so:birthDate "316" .
+
+<https://www.example.org/resource/7236> a so:Person;
+  so:name "Constantine I";
+  so:birthDate "272" .
+
+<https://www.example.org/resource/7362> a so:Person;
+  so:name "Casimir III of Poland";
+  so:birthDate "1310" .
+
+<https://www.example.org/resource/7426> a so:Person;
+  so:name "Charles I of England";
+  so:birthDate "1600" .
+
+<https://www.example.org/resource/7478> a so:Person;
+  so:name "Cuauhtémoc";
+  so:birthDate "1495" .
+
+<https://www.example.org/resource/8182> a so:Person;
+  so:name "Dwight D. Eisenhower";
+  so:birthDate "1890" .
+
+<https://www.example.org/resource/8205> a so:Person;
+  so:name "Deng Xiaoping";
+  so:birthDate "1904" .
+
+<https://www.example.org/resource/8474> a so:Person;
+  so:name "Arthur Wellesley, 1st Duke of Wellington";
+  so:birthDate "1769" .
+
+<https://www.example.org/resource/8551> a so:Person;
+  so:name "David";
+  so:birthDate "-1040" .
+
+<https://www.example.org/resource/8580> a so:Person;
+  so:name "Diocletian";
+  so:birthDate "244" .
+
+<https://www.example.org/resource/8592> a so:Person;
+  so:name "Domitian";
+  so:birthDate "51" .
+
+<https://www.example.org/resource/8778> a so:Person;
+  so:name "Daniel Ortega";
+  so:birthDate "1945" .
+
+<https://www.example.org/resource/3986> a so:Person;
+  so:name "Benjamin Franklin";
+  so:birthDate "1706" .
+
+<https://www.example.org/resource/9480> a so:Person;
+  so:name "Edmund Stoiber";
+  so:birthDate "1941" .
+
+<https://www.example.org/resource/10030> a so:Person;
+  so:name "Edmund Burke";
+  so:birthDate "1729" .
+
+<https://www.example.org/resource/10083> a so:Person;
+  so:name "Ethelred the Unready";
+  so:birthDate "968" .
+
+<https://www.example.org/resource/10128> a so:Person;
+  so:name "Elizabeth I of England";
+  so:birthDate "1533" .
+
+<https://www.example.org/resource/10130> a so:Person;
+  so:name "Emperor Jimmu";
+  so:birthDate "-711" .
+
+<https://www.example.org/resource/10148> a so:Person;
+  so:name "Ernst Kaltenbrunner";
+  so:birthDate "1903" .
+
+<https://www.example.org/resource/10150> a so:Person;
+  so:name "Engelbert Dollfuss";
+  so:birthDate "1892" .
+
+<https://www.example.org/resource/10245> a so:Person;
+  so:name "Edward VI of England";
+  so:birthDate "1537" .
+
+<https://www.example.org/resource/10286> a so:Person;
+  so:name "Enver Hoxha";
+  so:birthDate "1908" .
+
+<https://www.example.org/resource/10287> a so:Person;
+  so:name "Hirohito";
+  so:birthDate "1901" .
+
+<https://www.example.org/resource/10292> a so:Person;
+  so:name "Louis Mountbatten, 1st Earl Mountbatten of Burma";
+  so:birthDate "1900" .
+
+<https://www.example.org/resource/10354> a so:Person;
+  so:name "Edmund I of England";
+  so:birthDate "922" .
+
+<https://www.example.org/resource/10442> a so:Person;
+  so:name "Emperor Suizei";
+  so:birthDate "-600" .
+
+<https://www.example.org/resource/10443> a so:Person;
+  so:name "Emperor Annei";
+  so:birthDate "-575" .
+
+<https://www.example.org/resource/11023> a so:Person;
+  so:name "Honorius";
+  so:birthDate "384" .
+
+<https://www.example.org/resource/11285> a so:Person;
+  so:name "Francisco I. Madero";
+  so:birthDate "1873" .
+
+<https://www.example.org/resource/11371> a so:Person;
+  so:name "Fabius Maximus";
+  so:birthDate "-280" .
+
+<https://www.example.org/resource/11449> a so:Person;
+  so:name "Frederick William, Elector of Brandenburg";
+  so:birthDate "1620" .
+
+<https://www.example.org/resource/11466> a so:Person;
+  so:name "Francisco Franco";
+  so:birthDate "1892" .
+
+<https://www.example.org/resource/11472> a so:Person;
+  so:name "Frederick III, Holy Roman Emperor";
+  so:birthDate "1415" .
+
+<https://www.example.org/resource/11479> a so:Person;
+  so:name "Frederik Willem de Klerk";
+  so:birthDate "1936" .
+
+<https://www.example.org/resource/11551> a so:Person;
+  so:name "Francis II, Holy Roman Emperor";
+  so:birthDate "1768" .
+
+<https://www.example.org/resource/11794> a so:Person;
+  so:name "Frederick William I of Prussia";
+  so:birthDate "1688" .
+
+<https://www.example.org/resource/11809> a so:Person;
+  so:name "Francesco Cossiga";
+  so:birthDate "1928" .
+
+<https://www.example.org/resource/11968> a so:Person;
+  so:name "George Washington";
+  so:birthDate "1732" .
+
+<https://www.example.org/resource/12454> a so:Person;
+  so:name "Gough Whitlam";
+  so:birthDate "1916" .
+
+<https://www.example.org/resource/12495> a so:Person;
+  so:name "Grover Cleveland";
+  so:birthDate "1837" .
+
+<https://www.example.org/resource/12576> a so:Person;
+  so:name "Galba";
+  so:birthDate "-3" .
+
+<https://www.example.org/resource/12671> a so:Person;
+  so:name "Gustavus Adolphus of Sweden";
+  so:birthDate "1594" .
+
+<https://www.example.org/resource/12677> a so:Person;
+  so:name "Gallienus";
+  so:birthDate "218" .
+
+<https://www.example.org/resource/12835> a so:Person;
+  so:name "Galla Placidia";
+  so:birthDate "392" .
+
+<https://www.example.org/resource/12879> a so:Person;
+  so:name "George Hamilton-Gordon, 4th Earl of Aberdeen";
+  so:birthDate "1784" .
+
+<https://www.example.org/resource/13076> a so:Person;
+  so:name "Gordon Brown";
+  so:birthDate "1951" .
+
+<https://www.example.org/resource/13131> a so:Person;
+  so:name "Géza, Grand Prince of the Hungarians";
+  so:birthDate "945" .
+
+<https://www.example.org/resource/13151> a so:Person;
+  so:name "Gilgamesh";
+  so:birthDate "-3500" .
+
+<https://www.example.org/resource/13171> a so:Person;
+  so:name "Gro Harlem Brundtland";
+  so:birthDate "1939" .
+
+<https://www.example.org/resource/13436> a so:Person;
+  so:name "Heinrich Himmler";
+  so:birthDate "1900" .
+
+<https://www.example.org/resource/13447> a so:Person;
+  so:name "Horace Walpole, 4th Earl of Orford";
+  so:birthDate "1717" .
+
+<https://www.example.org/resource/13487> a so:Person;
+  so:name "Hermann Göring";
+  so:birthDate "1893" .
+
+<https://www.example.org/resource/13621> a so:Person;
+  so:name "Hadrian";
+  so:birthDate "76" .
+
+<https://www.example.org/resource/13669> a so:Person;
+  so:name "Hans-Dietrich Genscher";
+  so:birthDate "1927" .
+
+<https://www.example.org/resource/13682> a so:Person;
+  so:name "Herbert Hoover";
+  so:birthDate "1874" .
+
+<https://www.example.org/resource/13765> a so:Person;
+  so:name "Henry Kissinger";
+  so:birthDate "1923" .
+
+<https://www.example.org/resource/13956> a so:Person;
+  so:name "Heraclius";
+  so:birthDate "575" .
+
+<https://www.example.org/resource/13957> a so:Person;
+  so:name "Henry I of Germany";
+  so:birthDate "876" .
+
+<https://www.example.org/resource/13959> a so:Person;
+  so:name "Hannibal Barca";
+  so:birthDate "-248" .
+
+<https://www.example.org/resource/13976> a so:Person;
+  so:name "Hannibal Hamlin";
+  so:birthDate "1809" .
+
+<https://www.example.org/resource/14005> a so:Person;
+  so:name "Hezekiah";
+  so:birthDate "-739" .
+
+<https://www.example.org/resource/14055> a so:Person;
+  so:name "Humayun";
+  so:birthDate "1508" .
+
+<https://www.example.org/resource/14179> a so:Person;
+  so:name "Henry I of England";
+  so:birthDate "1068" .
+
+<https://www.example.org/resource/14186> a so:Person;
+  so:name "Henry VII of England";
+  so:birthDate "1457" .
+
+<https://www.example.org/resource/14227> a so:Person;
+  so:name "Elagabalus";
+  so:birthDate "203" .
+
+<https://www.example.org/resource/8629> a so:Person;
+  so:name "Donald Rumsfeld";
+  so:birthDate "1932" .
+
+<https://www.example.org/resource/14280> a so:Person;
+  so:name "Hafizullah Amin";
+  so:birthDate "1929" .
+
+<https://www.example.org/resource/14358> a so:Person;
+  so:name "Hammurabi";
+  so:birthDate "-1796" .
+
+<https://www.example.org/resource/14408> a so:Person;
+  so:name "Huneric";
+  so:birthDate "450" .
+
+<https://www.example.org/resource/14618> a so:Person;
+  so:name "İsmet İnönü";
+  so:birthDate "1884" .
+
+<https://www.example.org/resource/15179> a so:Person;
+  so:name "Indira Gandhi";
+  so:birthDate "1917" .
+
+<https://www.example.org/resource/15641> a so:Person;
+  so:name "Joseph Stalin";
+  so:birthDate "1878" .
+
+<https://www.example.org/resource/15771> a so:Person;
+  so:name "Johannes Rau";
+  so:birthDate "1931" .
+
+<https://www.example.org/resource/15777> a so:Person;
+  so:name "Joseph Goebbels";
+  so:birthDate "1897" .
+
+<https://www.example.org/resource/16324> a so:Person;
+  so:name "John Hancock";
+  so:birthDate "1737" .
+
+<https://www.example.org/resource/15898> a so:Person;
+  so:name "John Major";
+  so:birthDate "1943" .
+
+<https://www.example.org/resource/15912> a so:Person;
+  so:name "John A. Macdonald";
+  so:birthDate "1815" .
+
+<https://www.example.org/resource/15915> a so:Person;
+  so:name "John Diefenbaker";
+  so:birthDate "1895" .
+
+<https://www.example.org/resource/15923> a so:Person;
+  so:name "Dan Quayle";
+  so:birthDate "1947" .
+
+<https://www.example.org/resource/15924> a so:Person;
+  so:name "Julius Caesar";
+  so:birthDate "-100" .
+
+<https://www.example.org/resource/15950> a so:Person;
+  so:name "James Madison";
+  so:birthDate "1751" .
+
+<https://www.example.org/resource/15978> a so:Person;
+  so:name "James Monroe";
+  so:birthDate "1758" .
+
+<https://www.example.org/resource/15980> a so:Person;
+  so:name "James K. Polk";
+  so:birthDate "1795" .
+
+<https://www.example.org/resource/15992> a so:Person;
+  so:name "Jimmy Carter";
+  so:birthDate "1924" .
+
+<https://www.example.org/resource/16123> a so:Person;
+  so:name "Jeroboam";
+  so:birthDate "-950" .
+
+<https://www.example.org/resource/16134> a so:Person;
+  so:name "Jefferson Davis";
+  so:birthDate "1808" .
+
+<https://www.example.org/resource/16209> a so:Person;
+  so:name "Justinian I";
+  so:birthDate "483" .
+
+<https://www.example.org/resource/16243> a so:Person;
+  so:name "Jawaharlal Nehru";
+  so:birthDate "1889" .
+
+<https://www.example.org/resource/16294> a so:Person;
+  so:name "Jahangir";
+  so:birthDate "1569" .
+
+<https://www.example.org/resource/16300> a so:Person;
+  so:name "Julian the Apostate";
+  so:birthDate "330" .
+
+<https://www.example.org/resource/16321> a so:Person;
+  so:name "Joseph McCarthy";
+  so:birthDate "1908" .
+
+<https://www.example.org/resource/16419> a so:Person;
+  so:name "Jadwiga of Poland";
+  so:birthDate "1373" .
+
+<https://www.example.org/resource/16547> a so:Person;
+  so:name "Joachim von Ribbentrop";
+  so:birthDate "1893" .
+
+<https://www.example.org/resource/16550> a so:Person;
+  so:name "John of England";
+  so:birthDate "1166" .
+
+<https://www.example.org/resource/16567> a so:Person;
+  so:name "Josip Broz Tito";
+  so:birthDate "1892" .
+
+<https://www.example.org/resource/16634> a so:Person;
+  so:name "Konrad Adenauer";
+  so:birthDate "1876" .
+
+<https://www.example.org/resource/16774> a so:Person;
+  so:name "Karl Dönitz";
+  so:birthDate "1891" .
+
+<https://www.example.org/resource/17062> a so:Person;
+  so:name "Kwame Nkrumah";
+  so:birthDate "1909" .
+
+<https://www.example.org/resource/17103> a so:Person;
+  so:name "Kurt Waldheim";
+  so:birthDate "1918" .
+
+<https://www.example.org/resource/17272> a so:Person;
+  so:name "Konstantin Chernenko";
+  so:birthDate "1911" .
+
+<https://www.example.org/resource/17289> a so:Person;
+  so:name "Kliment Voroshilov";
+  so:birthDate "1881" .
+
+<https://www.example.org/resource/17313> a so:Person;
+  so:name "Kenneth I of Scotland";
+  so:birthDate "810" .
+
+<https://www.example.org/resource/17355> a so:Person;
+  so:name "Kenneth Kaunda";
+  so:birthDate "1924" .
+
+<https://www.example.org/resource/17372> a so:Person;
+  so:name "Klement Gottwald";
+  so:birthDate "1896" .
+
+<https://www.example.org/resource/17470> a so:Person;
+  so:name "Kurt Georg Kiesinger";
+  so:birthDate "1904" .
+
+<https://www.example.org/resource/17888> a so:Person;
+  so:name "Leon Trotsky";
+  so:birthDate "1879" .
+
+<https://www.example.org/resource/287468> a so:Person;
+  so:name "Elihu Root";
+  so:birthDate "1845" .
+
+<https://www.example.org/resource/17972> a so:Person;
+  so:name "Louis the Pious";
+  so:birthDate "778" .
+
+<https://www.example.org/resource/18010> a so:Person;
+  so:name "Leo III the Isaurian";
+  so:birthDate "685" .
+
+<https://www.example.org/resource/18046> a so:Person;
+  so:name "Tarquinius Priscus";
+  so:birthDate "-700" .
+
+<https://www.example.org/resource/18047> a so:Person;
+  so:name "Lucius Tarquinius Superbus";
+  so:birthDate "-600" .
+
+<https://www.example.org/resource/18390> a so:Person;
+  so:name "Lavrentiy Beria";
+  so:birthDate "1899" .
+
+<https://www.example.org/resource/18549> a so:Person;
+  so:name "Louis IX of France";
+  so:birthDate "1214" .
+
+<https://www.example.org/resource/18553> a so:Person;
+  so:name "Louis XIV of France";
+  so:birthDate "1638" .
+
+<https://www.example.org/resource/18633> a so:Person;
+  so:name "Lorenzo de' Medici";
+  so:birthDate "1449" .
+
+<https://www.example.org/resource/19046> a so:Person;
+  so:name "Mehmed II";
+  so:birthDate "1429" .
+
+<https://www.example.org/resource/19527> a so:Person;
+  so:name "Mao Zedong";
+  so:birthDate "1893" .
+
+<https://www.example.org/resource/81455> a so:Person;
+  so:name "William H. Seward";
+  so:birthDate "1801" .
+
+<https://www.example.org/resource/19821> a so:Person;
+  so:name "Marcus Claudius Tacitus";
+  so:birthDate "200" .
+
+<https://www.example.org/resource/19831> a so:Person;
+  so:name "Margaret Thatcher";
+  so:birthDate "1925" .
+
+<https://www.example.org/resource/19960> a so:Person;
+  so:name "Mark Antony";
+  so:birthDate "-83" .
+
+<https://www.example.org/resource/19986> a so:Person;
+  so:name "Murad I";
+  so:birthDate "1319" .
+
+<https://www.example.org/resource/19987> a so:Person;
+  so:name "Mehmed I";
+  so:birthDate "1382" .
+
+<https://www.example.org/resource/19988> a so:Person;
+  so:name "Murad II";
+  so:birthDate "1404" .
+
+<https://www.example.org/resource/19989> a so:Person;
+  so:name "Murad III";
+  so:birthDate "1546" .
+
+<https://www.example.org/resource/19990> a so:Person;
+  so:name "Mehmed III";
+  so:birthDate "1566" .
+
+<https://www.example.org/resource/19991> a so:Person;
+  so:name "Mustafa I";
+  so:birthDate "1591" .
+
+<https://www.example.org/resource/19992> a so:Person;
+  so:name "Murad IV";
+  so:birthDate "1612" .
+
+<https://www.example.org/resource/20155> a so:Person;
+  so:name "Marcus Aurelius";
+  so:birthDate "121" .
+
+<https://www.example.org/resource/20571> a so:Person;
+  so:name "Mary Robinson";
+  so:birthDate "1944" .
+
+<https://www.example.org/resource/20596> a so:Person;
+  so:name "Mieszko II Lambert";
+  so:birthDate "990" .
+
+<https://www.example.org/resource/20597> a so:Person;
+  so:name "Mieszko I of Poland";
+  so:birthDate "930" .
+
+<https://www.example.org/resource/20603> a so:Person;
+  so:name "Mary I of Scotland";
+  so:birthDate "1542" .
+
+<https://www.example.org/resource/20604> a so:Person;
+  so:name "Macbeth of Scotland";
+  so:birthDate "1005" .
+
+<https://www.example.org/resource/20618> a so:Person;
+  so:name "Martin Bormann";
+  so:birthDate "1900" .
+
+<https://www.example.org/resource/20633> a so:Person;
+  so:name "Macrinus";
+  so:birthDate "165" .
+
+<https://www.example.org/resource/20677> a so:Person;
+  so:name "Mary of Hungary";
+  so:birthDate "1371" .
+
+<https://www.example.org/resource/20709> a so:Person;
+  so:name "Mary II of England";
+  so:birthDate "1662" .
+
+<https://www.example.org/resource/20713> a so:Person;
+  so:name "Mary I of England";
+  so:birthDate "1516" .
+
+<https://www.example.org/resource/20747> a so:Person;
+  so:name "Moctezuma II";
+  so:birthDate "1466" .
+
+<https://www.example.org/resource/20767> a so:Person;
+  so:name "Menachem Begin";
+  so:birthDate "1913" .
+
+<https://www.example.org/resource/20886> a so:Person;
+  so:name "Mohammed Zahir Shah";
+  so:birthDate "1915" .
+
+<https://www.example.org/resource/20892> a so:Person;
+  so:name "Malcolm III of Scotland";
+  so:birthDate "1031" .
+
+<https://www.example.org/resource/20979> a so:Person;
+  so:name "Mikhail Gorbachev";
+  so:birthDate "1931" .
+
+<https://www.example.org/resource/21453> a so:Person;
+  so:name "Neville Chamberlain";
+  so:birthDate "1869" .
+
+<https://www.example.org/resource/21632> a so:Person;
+  so:name "Nero";
+  so:birthDate "37" .
+
+<https://www.example.org/resource/22109> a so:Person;
+  so:name "Nikolai Bukharin";
+  so:birthDate "1888" .
+
+<https://www.example.org/resource/22413> a so:Person;
+  so:name "Oliver Cromwell";
+  so:birthDate "1599" .
+
+<https://www.example.org/resource/22416> a so:Person;
+  so:name "Otto von Bismarck";
+  so:birthDate "1815" .
+
+<https://www.example.org/resource/22481> a so:Person;
+  so:name "Otho";
+  so:birthDate "32" .
+
+<https://www.example.org/resource/22492> a so:Person;
+  so:name "Osman I";
+  so:birthDate "1258" .
+
+<https://www.example.org/resource/22493> a so:Person;
+  so:name "Orhan I";
+  so:birthDate "1281" .
+
+<https://www.example.org/resource/22494> a so:Person;
+  so:name "Osman II";
+  so:birthDate "1604" .
+
+<https://www.example.org/resource/22811> a so:Person;
+  so:name "Otto IV, Holy Roman Emperor";
+  so:birthDate "1175" .
+
+<https://www.example.org/resource/23767> a so:Person;
+  so:name "Paul Keating";
+  so:birthDate "1944" .
+
+<https://www.example.org/resource/23867> a so:Person;
+  so:name "Pompey";
+  so:birthDate "-106" .
+
+<https://www.example.org/resource/24206> a so:Person;
+  so:name "Paavo Lipponen";
+  so:birthDate "1941" .
+
+<https://www.example.org/resource/24260> a so:Person;
+  so:name "Pervez Musharraf";
+  so:birthDate "1943" .
+
+<https://www.example.org/resource/24326> a so:Person;
+  so:name "Pol Pot";
+  so:birthDate "1925" .
+
+<https://www.example.org/resource/24507> a so:Person;
+  so:name "Pierre Trudeau";
+  so:birthDate "1919" .
+
+<https://www.example.org/resource/25093> a so:Person;
+  so:name "Philip II of France";
+  so:birthDate "1165" .
+
+<https://www.example.org/resource/25408> a so:Person;
+  so:name "Robert Byrd";
+  so:birthDate "1917" .
+
+<https://www.example.org/resource/25671> a so:Person;
+  so:name "Ralph Nader";
+  so:birthDate "1934" .
+
+<https://www.example.org/resource/25839> a so:Person;
+  so:name "Robert Menzies";
+  so:birthDate "1894" .
+
+<https://www.example.org/resource/25876> a so:Person;
+  so:name "Anastasius I";
+  so:birthDate "430" .
+
+<https://www.example.org/resource/25877> a so:Person;
+  so:name "Anastasios II";
+  so:birthDate "700" .
+
+<https://www.example.org/resource/25914> a so:Person;
+  so:name "Reinhard Heydrich";
+  so:birthDate "1904" .
+
+<https://www.example.org/resource/26022> a so:Person;
+  so:name "Rehoboam";
+  so:birthDate "-973" .
+
+<https://www.example.org/resource/26054> a so:Person;
+  so:name "Rudolf II, Holy Roman Emperor";
+  so:birthDate "1552" .
+
+<https://www.example.org/resource/26129> a so:Person;
+  so:name "Rajiv Gandhi";
+  so:birthDate "1944" .
+
+<https://www.example.org/resource/38828> a so:Person;
+  so:name "Michael Bloomberg";
+  so:birthDate "1942" .
+
+<https://www.example.org/resource/26284> a so:Person;
+  so:name "Richard III of England";
+  so:birthDate "1452" .
+
+<https://www.example.org/resource/26368> a so:Person;
+  so:name "Richard I of England";
+  so:birthDate "1157" .
+
+<https://www.example.org/resource/26560> a so:Person;
+  so:name "Rurik";
+  so:birthDate "830" .
+
+<https://www.example.org/resource/26582> a so:Person;
+  so:name "Robert I of Scotland";
+  so:birthDate "1274" .
+
+<https://www.example.org/resource/6984> a so:Person;
+  so:name "Colin Powell";
+  so:birthDate "1937" .
+
+<https://www.example.org/resource/26909> a so:Person;
+  so:name "Silvio Berlusconi";
+  so:birthDate "1936" .
+
+<https://www.example.org/resource/26983> a so:Person;
+  so:name "Saladin";
+  so:birthDate "1138" .
+
+<https://www.example.org/resource/26992> a so:Person;
+  so:name "Suleiman the Magnificent";
+  so:birthDate "1494" .
+
+<https://www.example.org/resource/27951> a so:Person;
+  so:name "Servius Tullius";
+  so:birthDate "-600" .
+
+<https://www.example.org/resource/28223> a so:Person;
+  so:name "Selim II";
+  so:birthDate "1524" .
+
+<https://www.example.org/resource/28334> a so:Person;
+  so:name "Sennacherib";
+  so:birthDate "-720" .
+
+<https://www.example.org/resource/28407> a so:Person;
+  so:name "Stefan Batory";
+  so:birthDate "1533" .
+
+<https://www.example.org/resource/28413> a so:Person;
+  so:name "Septimius Severus";
+  so:birthDate "145" .
+
+<https://www.example.org/resource/28596> a so:Person;
+  so:name "Shaka";
+  so:birthDate "1787" .
+
+<https://www.example.org/resource/28752> a so:Person;
+  so:name "Shah Jahan";
+  so:birthDate "1592" .
+
+<https://www.example.org/resource/28953> a so:Person;
+  so:name "Stephen of England";
+  so:birthDate "1092" .
+
+<https://www.example.org/resource/29490> a so:Person;
+  so:name "Saddam Hussein";
+  so:birthDate "1937" .
+
+<https://www.example.org/resource/29594> a so:Person;
+  so:name "Stephen I of Hungary";
+  so:birthDate "967" .
+
+<https://www.example.org/resource/29922> a so:Person;
+  so:name "Thomas Jefferson";
+  so:birthDate "1743" .
+
+<https://www.example.org/resource/30437> a so:Person;
+  so:name "Tutankhamun";
+  so:birthDate "-1341" .
+
+<https://www.example.org/resource/30536> a so:Person;
+  so:name "Tiberius";
+  so:birthDate "-42" .
+
+<https://www.example.org/resource/30570> a so:Person;
+  so:name "Trajan";
+  so:birthDate "53" .
+
+<https://www.example.org/resource/30797> a so:Person;
+  so:name "Tarja Halonen";
+  so:birthDate "1943" .
+
+<https://www.example.org/resource/31058> a so:Person;
+  so:name "Tipu Sultan";
+  so:birthDate "1750" .
+
+<https://www.example.org/resource/31131> a so:Person;
+  so:name "Theodosius I";
+  so:birthDate "347" .
+
+<https://www.example.org/resource/31182> a so:Person;
+  so:name "Toyotomi Hideyoshi";
+  so:birthDate "1537" .
+
+<https://www.example.org/resource/31222> a so:Person;
+  so:name "Theodoric the Great";
+  so:birthDate "454" .
+
+<https://www.example.org/resource/10979> a so:Person;
+  so:name "Franklin D. Roosevelt";
+  so:birthDate "1882" .
+
+<https://www.example.org/resource/31350> a so:Person;
+  so:name "Thabo Mbeki";
+  so:birthDate "1942" .
+
+<https://www.example.org/resource/31362> a so:Person;
+  so:name "Thomas R. Marshall";
+  so:birthDate "1854" .
+
+<https://www.example.org/resource/31752> a so:Person;
+  so:name "Ulysses S. Grant";
+  so:birthDate "1822" .
+
+<https://www.example.org/resource/32048> a so:Person;
+  so:name "Urho Kekkonen";
+  so:birthDate "1900" .
+
+<https://www.example.org/resource/32429> a so:Person;
+  so:name "Vidkun Quisling";
+  so:birthDate "1887" .
+
+<https://www.example.org/resource/32519> a so:Person;
+  so:name "Valens";
+  so:birthDate "328" .
+
+<https://www.example.org/resource/32569> a so:Person;
+  so:name "Vitellius";
+  so:birthDate "24" .
+
+<https://www.example.org/resource/32570> a so:Person;
+  so:name "Vespasian";
+  so:birthDate "9" .
+
+<https://www.example.org/resource/32817> a so:Person;
+  so:name "Vladimir Putin";
+  so:birthDate "1952" .
+
+<https://www.example.org/resource/32836> a so:Person;
+  so:name "Vicente Fox";
+  so:birthDate "1942" .
+
+<https://www.example.org/resource/33060> a so:Person;
+  so:name "Warren G. Harding";
+  so:birthDate "1865" .
+
+<https://www.example.org/resource/33265> a so:Person;
+  so:name "Winston Churchill";
+  so:birthDate "1874" .
+
+<https://www.example.org/resource/33299> a so:Person;
+  so:name "William Henry Harrison";
+  so:birthDate "1773" .
+
+<https://www.example.org/resource/33433> a so:Person;
+  so:name "Wilfred Laurier";
+  so:birthDate "1841" .
+
+<https://www.example.org/resource/33521> a so:Person;
+  so:name "William McKinley";
+  so:birthDate "1843" .
+
+<https://www.example.org/resource/33522> a so:Person;
+  so:name "William Howard Taft";
+  so:birthDate "1857" .
+
+<https://www.example.org/resource/33523> a so:Person;
+  so:name "Woodrow Wilson";
+  so:birthDate "1856" .
+
+<https://www.example.org/resource/33632> a so:Person;
+  so:name "William Pitt, 1st Earl of Chatham";
+  so:birthDate "1708" .
+
+<https://www.example.org/resource/33719> a so:Person;
+  so:name "Wim Kok";
+  so:birthDate "1938" .
+
+<https://www.example.org/resource/19763> a so:Person;
+  so:name "Martin Van Buren";
+  so:birthDate "1782" .
+
+<https://www.example.org/resource/33915> a so:Person;
+  so:name "William the Lion";
+  so:birthDate "1143" .
+
+<https://www.example.org/resource/33918> a so:Person;
+  so:name "William II of England";
+  so:birthDate "1056" .
+
+<https://www.example.org/resource/33954> a so:Person;
+  so:name "William Ewart Gladstone";
+  so:birthDate "1809" .
+
+<https://www.example.org/resource/34289> a so:Person;
+  so:name "Yasser Arafat";
+  so:birthDate "1929" .
+
+<https://www.example.org/resource/36579> a so:Person;
+  so:name "Clovis I";
+  so:birthDate "466" .
+
+<https://www.example.org/resource/36623> a so:Person;
+  so:name "George Marshall";
+  so:birthDate "1880" .
+
+<https://www.example.org/resource/36674> a so:Person;
+  so:name "Glycerius";
+  so:birthDate "420" .
+
+<https://www.example.org/resource/36812> a so:Person;
+  so:name "Pericles";
+  so:birthDate "-495" .
+
+<https://www.example.org/resource/36948> a so:Person;
+  so:name "Giuseppe Mazzini";
+  so:birthDate "1805" .
+
+<https://www.example.org/resource/37045> a so:Person;
+  so:name "Odoacer";
+  so:birthDate "435" .
+
+<https://www.example.org/resource/37211> a so:Person;
+  so:name "William I of the Netherlands";
+  so:birthDate "1772" .
+
+<https://www.example.org/resource/37256> a so:Person;
+  so:name "Michael of Romania";
+  so:birthDate "1921" .
+
+<https://www.example.org/resource/37258> a so:Person;
+  so:name "Carol II of Romania";
+  so:birthDate "1893" .
+
+<https://www.example.org/resource/37261> a so:Person;
+  so:name "Ion Antonescu";
+  so:birthDate "1882" .
+
+<https://www.example.org/resource/37266> a so:Person;
+  so:name "Ferdinand I of Romania";
+  so:birthDate "1865" .
+
+<https://www.example.org/resource/37325> a so:Person;
+  so:name "Marcus Junius Brutus";
+  so:birthDate "-85" .
+
+<https://www.example.org/resource/37762> a so:Person;
+  so:name "Tamar of Georgia";
+  so:birthDate "1160" .
+
+<https://www.example.org/resource/37794> a so:Person;
+  so:name "Felix Edmundovich Dzerzhinsky";
+  so:birthDate "1877" .
+
+<https://www.example.org/resource/37998> a so:Person;
+  so:name "François Mitterrand";
+  so:birthDate "1916" .
+
+<https://www.example.org/resource/38117> a so:Person;
+  so:name "Gerry Adams";
+  so:birthDate "1948" .
+
+<https://www.example.org/resource/38197> a so:Person;
+  so:name "John I of Bohemia";
+  so:birthDate "1296" .
+
+<https://www.example.org/resource/38301> a so:Person;
+  so:name "Fidel Castro";
+  so:birthDate "1926" .
+
+<https://www.example.org/resource/38447> a so:Person;
+  so:name "Albert II of Germany";
+  so:birthDate "1397" .
+
+<https://www.example.org/resource/38740> a so:Person;
+  so:name "Louis I of Hungary";
+  so:birthDate "1326" .
+
+<https://www.example.org/resource/38746> a so:Person;
+  so:name "Oscar I of Sweden";
+  so:birthDate "1799" .
+
+<https://www.example.org/resource/38802> a so:Person;
+  so:name "Louis IV, Holy Roman Emperor";
+  so:birthDate "1282" .
+
+<https://www.example.org/resource/38826> a so:Person;
+  so:name "Wenceslaus, King of the Romans";
+  so:birthDate "1361" .
+
+<https://www.example.org/resource/184136> a so:Person;
+  so:name "Ted Kennedy";
+  so:birthDate "1932" .
+
+<https://www.example.org/resource/38888> a so:Person;
+  so:name "Georgy Zhukov";
+  so:birthDate "1896" .
+
+<https://www.example.org/resource/38889> a so:Person;
+  so:name "Sigismund, Holy Roman Emperor";
+  so:birthDate "1368" .
+
+<https://www.example.org/resource/38895> a so:Person;
+  so:name "Charles IV, Holy Roman Emperor";
+  so:birthDate "1316" .
+
+<https://www.example.org/resource/38935> a so:Person;
+  so:name "Otto III, Holy Roman Emperor";
+  so:birthDate "980" .
+
+<https://www.example.org/resource/38999> a so:Person;
+  so:name "Boleslaw I of Poland";
+  so:birthDate "967" .
+
+<https://www.example.org/resource/203756> a so:Person;
+  so:name "Bhumibol Adulyadej";
+  so:birthDate "1927" .
+
+<https://www.example.org/resource/39064> a so:Person;
+  so:name "Casimir IV Jagiellon";
+  so:birthDate "1427" .
+
+<https://www.example.org/resource/39070> a so:Person;
+  so:name "Maximilian I, Holy Roman Emperor";
+  so:birthDate "1459" .
+
+<https://www.example.org/resource/39075> a so:Person;
+  so:name "Spiro Agnew";
+  so:birthDate "1918" .
+
+<https://www.example.org/resource/39380> a so:Person;
+  so:name "Maximilian II, Holy Roman Emperor";
+  so:birthDate "1527" .
+
+<https://www.example.org/resource/39699> a so:Person;
+  so:name "Frederick I, Holy Roman Emperor";
+  so:birthDate "1122" .
+
+<https://www.example.org/resource/39709> a so:Person;
+  so:name "Edward V of England";
+  so:birthDate "1470" .
+
+<https://www.example.org/resource/39764> a so:Person;
+  so:name "Jacques Chirac";
+  so:birthDate "1932" .
+
+<https://www.example.org/resource/39768> a so:Person;
+  so:name "Erich Honecker";
+  so:birthDate "1912" .
+
+<https://www.example.org/resource/39824> a so:Person;
+  so:name "Sigismund II Augustus";
+  so:birthDate "1520" .
+
+<https://www.example.org/resource/39833> a so:Person;
+  so:name "Charles I of Naples";
+  so:birthDate "1226" .
+
+<https://www.example.org/resource/39946> a so:Person;
+  so:name "Charles XV of Sweden";
+  so:birthDate "1826" .
+
+<https://www.example.org/resource/40148> a so:Person;
+  so:name "Harold Godwinson";
+  so:birthDate "1022" .
+
+<https://www.example.org/resource/40225> a so:Person;
+  so:name "George IV of the United Kingdom";
+  so:birthDate "1762" .
+
+<https://www.example.org/resource/40243> a so:Person;
+  so:name "Edward the Confessor";
+  so:birthDate "1003" .
+
+<https://www.example.org/resource/40259> a so:Person;
+  so:name "Harthacanute";
+  so:birthDate "1018" .
+
+<https://www.example.org/resource/40400> a so:Person;
+  so:name "James Garfield";
+  so:birthDate "1831" .
+
+<https://www.example.org/resource/40406> a so:Person;
+  so:name "Sweyn I of Denmark";
+  so:birthDate "960" .
+
+<https://www.example.org/resource/40439> a so:Person;
+  so:name "Lothair III, Holy Roman Emperor";
+  so:birthDate "1075" .
+
+<https://www.example.org/resource/40440> a so:Person;
+  so:name "Conrad III of Germany";
+  so:birthDate "1093" .
+
+<https://www.example.org/resource/40501> a so:Person;
+  so:name "Canute the Great";
+  so:birthDate "990" .
+
+<https://www.example.org/resource/40548> a so:Person;
+  so:name "Paul von Hindenburg";
+  so:birthDate "1847" .
+
+<https://www.example.org/resource/40575> a so:Person;
+  so:name "Vladimir I of Kiev";
+  so:birthDate "958" .
+
+<https://www.example.org/resource/40599> a so:Person;
+  so:name "Otto II, Holy Roman Emperor";
+  so:birthDate "955" .
+
+<https://www.example.org/resource/40606> a so:Person;
+  so:name "Sviatoslav I of Kiev";
+  so:birthDate "942" .
+
+<https://www.example.org/resource/41896> a so:Person;
+  so:name "Helmut Kohl";
+  so:birthDate "1930" .
+
+<https://www.example.org/resource/41901> a so:Person;
+  so:name "Helmut Schmidt";
+  so:birthDate "1918" .
+
+<https://www.example.org/resource/42029> a so:Person;
+  so:name "George III of the United Kingdom";
+  so:birthDate "1738" .
+
+<https://www.example.org/resource/42120> a so:Person;
+  so:name "Haile Selassie I of Ethiopia";
+  so:birthDate "1892" .
+
+<https://www.example.org/resource/42172> a so:Person;
+  so:name "Walter Mondale";
+  so:birthDate "1928" .
+
+<https://www.example.org/resource/89163> a so:Person;
+  so:name "William A. Wheeler";
+  so:birthDate "1819" .
+
+<https://www.example.org/resource/42419> a so:Person;
+  so:name "Harald I of Denmark";
+  so:birthDate "910" .
+
+<https://www.example.org/resource/42558> a so:Person;
+  so:name "Nikita Khrushchev";
+  so:birthDate "1894" .
+
+<https://www.example.org/resource/42580> a so:Person;
+  so:name "Leopoldo Galtieri";
+  so:birthDate "1926" .
+
+<https://www.example.org/resource/42583> a so:Person;
+  so:name "Sigismund I the Old";
+  so:birthDate "1467" .
+
+<https://www.example.org/resource/42584> a so:Person;
+  so:name "Władysław III of Poland";
+  so:birthDate "1424" .
+
+<https://www.example.org/resource/42586> a so:Person;
+  so:name "Jogaila";
+  so:birthDate "1362" .
+
+<https://www.example.org/resource/42636> a so:Person;
+  so:name "Hubert Humphrey";
+  so:birthDate "1911" .
+
+<https://www.example.org/resource/42897> a so:Person;
+  so:name "Alexander Dubček";
+  so:birthDate "1921" .
+
+<https://www.example.org/resource/43271> a so:Person;
+  so:name "William IV of the United Kingdom";
+  so:birthDate "1765" .
+
+<https://www.example.org/resource/43382> a so:Person;
+  so:name "Zenobia";
+  so:birthDate "240" .
+
+<https://www.example.org/resource/43413> a so:Person;
+  so:name "Aurelian";
+  so:birthDate "214" .
+
+<https://www.example.org/resource/43474> a so:Person;
+  so:name "William Lamb, 2nd Viscount Melbourne";
+  so:birthDate "1779" .
+
+<https://www.example.org/resource/43715> a so:Person;
+  so:name "John McCain";
+  so:birthDate "1936" .
+
+<https://www.example.org/resource/43983> a so:Person;
+  so:name "Yitzhak Rabin";
+  so:birthDate "1922" .
+
+<https://www.example.org/resource/44230> a so:Person;
+  so:name "Gelimer";
+  so:birthDate "480" .
+
+<https://www.example.org/resource/44239> a so:Person;
+  so:name "Catherine I of Russia";
+  so:birthDate "1684" .
+
+<https://www.example.org/resource/44318> a so:Person;
+  so:name "Phocas";
+  so:birthDate "550" .
+
+<https://www.example.org/resource/44319> a so:Person;
+  so:name "Elizabeth of Russia";
+  so:birthDate "1709" .
+
+<https://www.example.org/resource/44324> a so:Person;
+  so:name "Commodus";
+  so:birthDate "161" .
+
+<https://www.example.org/resource/44356> a so:Person;
+  so:name "Peter I of Russia";
+  so:birthDate "1672" .
+
+<https://www.example.org/resource/44380> a so:Person;
+  so:name "Anna of Russia";
+  so:birthDate "1693" .
+
+<https://www.example.org/resource/44393> a so:Person;
+  so:name "Claudius II";
+  so:birthDate "213" .
+
+<https://www.example.org/resource/44399> a so:Person;
+  so:name "Conrad II, Holy Roman Emperor";
+  so:birthDate "990" .
+
+<https://www.example.org/resource/44533> a so:Person;
+  so:name "Li Peng";
+  so:birthDate "1928" .
+
+<https://www.example.org/resource/44833> a so:Person;
+  so:name "Manuel I Komnenos";
+  so:birthDate "1118" .
+
+<https://www.example.org/resource/44839> a so:Person;
+  so:name "Manuel II Palaiologos";
+  so:birthDate "1350" .
+
+<https://www.example.org/resource/44848> a so:Person;
+  so:name "Edward II of England";
+  so:birthDate "1284" .
+
+<https://www.example.org/resource/45233> a so:Person;
+  so:name "Robert Peel";
+  so:birthDate "1788" .
+
+<https://www.example.org/resource/45321> a so:Person;
+  so:name "Rudolph I of Habsburg";
+  so:birthDate "1218" .
+
+<https://www.example.org/resource/45597> a so:Person;
+  so:name "Henry V of England";
+  so:birthDate "1386" .
+
+<https://www.example.org/resource/45651> a so:Person;
+  so:name "Sarvepalli Radhakrishnan";
+  so:birthDate "1888" .
+
+<https://www.example.org/resource/46000> a so:Person;
+  so:name "Alexander John Cuza";
+  so:birthDate "1820" .
+
+<https://www.example.org/resource/46115> a so:Person;
+  so:name "Lev Kamenev";
+  so:birthDate "1883" .
+
+<https://www.example.org/resource/46116> a so:Person;
+  so:name "Grigory Zinoviev";
+  so:birthDate "1883" .
+
+<https://www.example.org/resource/46209> a so:Person;
+  so:name "Louis II of Hungary";
+  so:birthDate "1506" .
+
+<https://www.example.org/resource/46247> a so:Person;
+  so:name "Peter III of Russia";
+  so:birthDate "1728" .
+
+<https://www.example.org/resource/46289> a so:Person;
+  so:name "Xerxes I of Persia";
+  so:birthDate "-519" .
+
+<https://www.example.org/resource/46290> a so:Person;
+  so:name "Xerxes II of Persia";
+  so:birthDate "-450" .
+
+<https://www.example.org/resource/46373> a so:Person;
+  so:name "Edward I of England";
+  so:birthDate "1239" .
+
+<https://www.example.org/resource/46377> a so:Person;
+  so:name "Edward III of England";
+  so:birthDate "1312" .
+
+<https://www.example.org/resource/46386> a so:Person;
+  so:name "Richard Cromwell";
+  so:birthDate "1626" .
+
+<https://www.example.org/resource/46389> a so:Person;
+  so:name "George II of Great Britain";
+  so:birthDate "1683" .
+
+<https://www.example.org/resource/46390> a so:Person;
+  so:name "Edward IV of England";
+  so:birthDate "1442" .
+
+<https://www.example.org/resource/46391> a so:Person;
+  so:name "Ramsay MacDonald";
+  so:birthDate "1866" .
+
+<https://www.example.org/resource/46426> a so:Person;
+  so:name "Basil II";
+  so:birthDate "958" .
+
+<https://www.example.org/resource/46531> a so:Person;
+  so:name "Richard II of England";
+  so:birthDate "1367" .
+
+<https://www.example.org/resource/46547> a so:Person;
+  so:name "Samuil of Bulgaria";
+  so:birthDate "958" .
+
+<https://www.example.org/resource/46591> a so:Person;
+  so:name "Henry III of England";
+  so:birthDate "1207" .
+
+<https://www.example.org/resource/46601> a so:Person;
+  so:name "Cambyses II of Persia";
+  so:birthDate "-600" .
+
+<https://www.example.org/resource/46605> a so:Person;
+  so:name "Demosthenes";
+  so:birthDate "-384" .
+
+<https://www.example.org/resource/46607> a so:Person;
+  so:name "Catiline";
+  so:birthDate "-108" .
+
+<https://www.example.org/resource/46641> a so:Person;
+  so:name "Nicholas I of Russia";
+  so:birthDate "1796" .
+
+<https://www.example.org/resource/46652> a so:Person;
+  so:name "Enrico Berlinguer";
+  so:birthDate "1922" .
+
+<https://www.example.org/resource/46670> a so:Person;
+  so:name "Constantine VIII";
+  so:birthDate "960" .
+
+<https://www.example.org/resource/46684> a so:Person;
+  so:name "Anne of Great Britain";
+  so:birthDate "1665" .
+
+<https://www.example.org/resource/46688> a so:Person;
+  so:name "Charles II of England";
+  so:birthDate "1630" .
+
+<https://www.example.org/resource/46755> a so:Person;
+  so:name "George VI of the United Kingdom";
+  so:birthDate "1895" .
+
+<https://www.example.org/resource/46823> a so:Person;
+  so:name "George V of the United Kingdom";
+  so:birthDate "1865" .
+
+<https://www.example.org/resource/46836> a so:Person;
+  so:name "David Lloyd George";
+  so:birthDate "1863" .
+
+<https://www.example.org/resource/46852> a so:Person;
+  so:name "George I of Great Britain";
+  so:birthDate "1660" .
+
+<https://www.example.org/resource/46858> a so:Person;
+  so:name "Henry VI of England";
+  so:birthDate "1421" .
+
+<https://www.example.org/resource/46996> a so:Person;
+  so:name "Marcus Licinius Crassus";
+  so:birthDate "-115" .
+
+<https://www.example.org/resource/47030> a so:Person;
+  so:name "Lucius Cornelius Cinna";
+  so:birthDate "-100" .
+
+<https://www.example.org/resource/47037> a so:Person;
+  so:name "Offa of Mercia";
+  so:birthDate "730" .
+
+<https://www.example.org/resource/47092> a so:Person;
+  so:name "Edmund Ironside";
+  so:birthDate "980" .
+
+<https://www.example.org/resource/47099> a so:Person;
+  so:name "Edwy of England";
+  so:birthDate "941" .
+
+<https://www.example.org/resource/47118> a so:Person;
+  so:name "Darius I of Persia";
+  so:birthDate "-549" .
+
+<https://www.example.org/resource/47121> a so:Person;
+  so:name "Darius II of Persia";
+  so:birthDate "-475" .
+
+<https://www.example.org/resource/47122> a so:Person;
+  so:name "Darius III of Persia";
+  so:birthDate "-380" .
+
+<https://www.example.org/resource/47153> a so:Person;
+  so:name "Louis the German";
+  so:birthDate "806" .
+
+<https://www.example.org/resource/47367> a so:Person;
+  so:name "Æthelred of Wessex";
+  so:birthDate "840" .
+
+<https://www.example.org/resource/47372> a so:Person;
+  so:name "Charles the Bald, Holy Roman Emperor";
+  so:birthDate "823" .
+
+<https://www.example.org/resource/47382> a so:Person;
+  so:name "Edward the Martyr";
+  so:birthDate "962" .
+
+<https://www.example.org/resource/47387> a so:Person;
+  so:name "William III of England";
+  so:birthDate "1650" .
+
+<https://www.example.org/resource/47399> a so:Person;
+  so:name "Edgar the Peaceful of England";
+  so:birthDate "943" .
+
+<https://www.example.org/resource/47923> a so:Person;
+  so:name "Queen Victoria";
+  so:birthDate "1819" .
+
+<https://www.example.org/resource/47969> a so:Person;
+  so:name "Justin I";
+  so:birthDate "450" .
+
+<https://www.example.org/resource/48303> a so:Person;
+  so:name "John III Sobieski";
+  so:birthDate "1629" .
+
+<https://www.example.org/resource/48436> a so:Person;
+  so:name "Louis VII of France";
+  so:birthDate "1120" .
+
+<https://www.example.org/resource/48449> a so:Person;
+  so:name "Maria Theresa of Austria";
+  so:birthDate "1717" .
+
+<https://www.example.org/resource/48569> a so:Person;
+  so:name "Shimon Peres";
+  so:birthDate "1923" .
+
+<https://www.example.org/resource/48570> a so:Person;
+  so:name "Egbert of Wessex";
+  so:birthDate "770" .
+
+<https://www.example.org/resource/48571> a so:Person;
+  so:name "Æthelwulf of Wessex";
+  so:birthDate "795" .
+
+<https://www.example.org/resource/48651> a so:Person;
+  so:name "Fritigern";
+  so:birthDate "-400" .
+
+<https://www.example.org/resource/48874> a so:Person;
+  so:name "Hugo Chávez";
+  so:birthDate "1954" .
+
+<https://www.example.org/resource/48918> a so:Person;
+  so:name "Alexandra of Denmark";
+  so:birthDate "1844" .
+
+<https://www.example.org/resource/49030> a so:Person;
+  so:name "José Ramos-Horta";
+  so:birthDate "1949" .
+
+<https://www.example.org/resource/49040> a so:Person;
+  so:name "Magnus Maximus";
+  so:birthDate "335" .
+
+<https://www.example.org/resource/49240> a so:Person;
+  so:name "Patrice Lumumba";
+  so:birthDate "1925" .
+
+<https://www.example.org/resource/49260> a so:Person;
+  so:name "Willy Brandt";
+  so:birthDate "1913" .
+
+<https://www.example.org/resource/49367> a so:Person;
+  so:name "Laurent-Désiré Kabila";
+  so:birthDate "1939" .
+
+<https://www.example.org/resource/49435> a so:Person;
+  so:name "Axel Oxenstierna";
+  so:birthDate "1583" .
+
+<https://www.example.org/resource/49522> a so:Person;
+  so:name "Anwar Sadat";
+  so:birthDate "1918" .
+
+<https://www.example.org/resource/49544> a so:Person;
+  so:name "Junichiro Koizumi";
+  so:birthDate "1942" .
+
+<https://www.example.org/resource/49549> a so:Person;
+  so:name "Katsura Taro";
+  so:birthDate "1848" .
+
+<https://www.example.org/resource/49562> a so:Person;
+  so:name "Nicolae Ceauşescu";
+  so:birthDate "1918" .
+
+<https://www.example.org/resource/49613> a so:Person;
+  so:name "Christina, Queen of Sweden";
+  so:birthDate "1626" .
+
+<https://www.example.org/resource/49639> a so:Person;
+  so:name "Itō Hirobumi";
+  so:birthDate "1841" .
+
+<https://www.example.org/resource/49907> a so:Person;
+  so:name "Caracalla";
+  so:birthDate "188" .
+
+<https://www.example.org/resource/49955> a so:Person;
+  so:name "Jean-Marie Le Pen";
+  so:birthDate "1928" .
+
+<https://www.example.org/resource/49966> a so:Person;
+  so:name "Carlos Menem";
+  so:birthDate "1930" .
+
+<https://www.example.org/resource/50012> a so:Person;
+  so:name "Francis I of France";
+  so:birthDate "1494" .
+
+<https://www.example.org/resource/50050> a so:Person;
+  so:name "Alfred Rosenberg";
+  so:birthDate "1893" .
+
+<https://www.example.org/resource/50122> a so:Person;
+  so:name "Yuri Andropov";
+  so:birthDate "1914" .
+
+<https://www.example.org/resource/50151> a so:Person;
+  so:name "Leonid Brezhnev";
+  so:birthDate "1906" .
+
+<https://www.example.org/resource/50206> a so:Person;
+  so:name "Fulgencio Batista";
+  so:birthDate "1901" .
+
+<https://www.example.org/resource/50217> a so:Person;
+  so:name "Mehmed VI";
+  so:birthDate "1861" .
+
+<https://www.example.org/resource/50226> a so:Person;
+  so:name "William Wilberforce";
+  so:birthDate "1759" .
+
+<https://www.example.org/resource/50444> a so:Person;
+  so:name "Zhou Enlai";
+  so:birthDate "1898" .
+
+<https://www.example.org/resource/50450> a so:Person;
+  so:name "Wilhelm II";
+  so:birthDate "1859" .
+
+<https://www.example.org/resource/50552> a so:Person;
+  so:name "James V of Scotland";
+  so:birthDate "1512" .
+
+<https://www.example.org/resource/50556> a so:Person;
+  so:name "James IV of Scotland";
+  so:birthDate "1473" .
+
+<https://www.example.org/resource/51109> a so:Person;
+  so:name "Charles VII, Holy Roman Emperor";
+  so:birthDate "1697" .
+
+<https://www.example.org/resource/51189> a so:Person;
+  so:name "Julius Nepos";
+  so:birthDate "430" .
+
+<https://www.example.org/resource/51250> a so:Person;
+  so:name "Wojciech Jaruzelski";
+  so:birthDate "1923" .
+
+<https://www.example.org/resource/51271> a so:Person;
+  so:name "Louis XVI of France";
+  so:birthDate "1754" .
+
+<https://www.example.org/resource/51307> a so:Person;
+  so:name "Miklós Horthy";
+  so:birthDate "1868" .
+
+<https://www.example.org/resource/51456> a so:Person;
+  so:name "Mohammed Daoud Khan";
+  so:birthDate "1909" .
+
+<https://www.example.org/resource/51487> a so:Person;
+  so:name "Salvador Allende";
+  so:birthDate "1908" .
+
+<https://www.example.org/resource/51584> a so:Person;
+  so:name "Eva Perón";
+  so:birthDate "1919" .
+
+<https://www.example.org/resource/51626> a so:Person;
+  so:name "Pelayo of Asturias";
+  so:birthDate "690" .
+
+<https://www.example.org/resource/51695> a so:Person;
+  so:name "Franz Joseph I of Austria";
+  so:birthDate "1830" .
+
+<https://www.example.org/resource/51831> a so:Person;
+  so:name "Valerian";
+  so:birthDate "200" .
+
+<https://www.example.org/resource/51879> a so:Person;
+  so:name "Gamal Abdel Nasser";
+  so:birthDate "1918" .
+
+<https://www.example.org/resource/51884> a so:Person;
+  so:name "Hosni Mubarak";
+  so:birthDate "1928" .
+
+<https://www.example.org/resource/52023> a so:Person;
+  so:name "Farouk of Egypt";
+  so:birthDate "1920" .
+
+<https://www.example.org/resource/52110> a so:Person;
+  so:name "John C. Calhoun";
+  so:birthDate "1782" .
+
+<https://www.example.org/resource/52269> a so:Person;
+  so:name "Edward Heath";
+  so:birthDate "1916" .
+
+<https://www.example.org/resource/52271> a so:Person;
+  so:name "Harold Wilson";
+  so:birthDate "1916" .
+
+<https://www.example.org/resource/52278> a so:Person;
+  so:name "James Callaghan";
+  so:birthDate "1912" .
+
+<https://www.example.org/resource/52346> a so:Person;
+  so:name "Nebuchadrezzar II";
+  so:birthDate "-634" .
+
+<https://www.example.org/resource/52392> a so:Person;
+  so:name "Prince Maximilian of Baden";
+  so:birthDate "1867" .
+
+<https://www.example.org/resource/52544> a so:Person;
+  so:name "Aldo Moro";
+  so:birthDate "1916" .
+
+<https://www.example.org/resource/52548> a so:Person;
+  so:name "Carl Bildt";
+  so:birthDate "1949" .
+
+<https://www.example.org/resource/52608> a so:Person;
+  so:name "Sigismund III Vasa";
+  so:birthDate "1566" .
+
+<https://www.example.org/resource/53029> a so:Person;
+  so:name "Muammar al-Gaddafi";
+  so:birthDate "1942" .
+
+<https://www.example.org/resource/53739> a so:Person;
+  so:name "Marcian";
+  so:birthDate "396" .
+
+<https://www.example.org/resource/54017> a so:Person;
+  so:name "Ngo Dinh Diem";
+  so:birthDate "1901" .
+
+<https://www.example.org/resource/54132> a so:Person;
+  so:name "Olof Palme";
+  so:birthDate "1927" .
+
+<https://www.example.org/resource/54204> a so:Person;
+  so:name "Philip II of Macedon";
+  so:birthDate "-382" .
+
+<https://www.example.org/resource/54247> a so:Person;
+  so:name "Louis XV of France";
+  so:birthDate "1710" .
+
+<https://www.example.org/resource/54386> a so:Person;
+  so:name "Philip II of Spain";
+  so:birthDate "1527" .
+
+<https://www.example.org/resource/54533> a so:Person;
+  so:name "Lyndon B. Johnson";
+  so:birthDate "1908" .
+
+<https://www.example.org/resource/54953> a so:Person;
+  so:name "Olybrius";
+  so:birthDate "431" .
+
+<https://www.example.org/resource/55072> a so:Person;
+  so:name "Puyi";
+  so:birthDate "1906" .
+
+<https://www.example.org/resource/55077> a so:Person;
+  so:name "Chen Shui-bian";
+  so:birthDate "1950" .
+
+<https://www.example.org/resource/55251> a so:Person;
+  so:name "Titus";
+  so:birthDate "39" .
+
+<https://www.example.org/resource/55654> a so:Person;
+  so:name "Sun Quan";
+  so:birthDate "182" .
+
+<https://www.example.org/resource/55917> a so:Person;
+  so:name "Simón Bolívar";
+  so:birthDate "1783" .
+
+<https://www.example.org/resource/55986> a so:Person;
+  so:name "Xanana Gusmão";
+  so:birthDate "1946" .

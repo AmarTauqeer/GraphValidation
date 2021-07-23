@@ -25,22 +25,24 @@ class RdfGraph(MethodResource, Resource):
             prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             prefix schema: <http://schema.org/>
             prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-            SELECT ?a ?givenName ?birthDate ?placeOfBirth
+            SELECT ?person ?givenName ?birthDate ?placeOfBirth
                         WHERE {
-                        ?a a schema:Person;
+                        ?person a schema:Person;
                             schema:name ?givenName;
-                            schema:birthDate ?birthDate;
-                            schema:birthPlace ?pob.
-                            ?pob rdf:type schema:Place;
-                                    schema:name ?placeOfBirth .
+                            schema:birthDate ?birthDate .
+                            
         }""")
+        # schema:birthPlace ?pob.
+        #                     ?pob rdf:type schema:Place;
+        #                             schema:name ?placeOfBirth .
         for row in qres:
-            print("{}{}{}".format(row.givenName, row.birthDate, row.placeOfBirth))
+            #print("{}{}{}".format(row.givenName, row.birthDate, row.person))
             gname = "{}".format(row.givenName)
             bdate = "{}".format(row.birthDate)
-            pobirth = "{}".format(row.placeOfBirth)
+            uriId = "{}".format(row.person)
+            #obirth = "{}".format(row.placeOfBirth)
             data = {
-                'givenName': gname, 'birthDate': bdate, 'placeOfBirth': pobirth
+                'givenName': gname, 'birthDate': bdate, 'uriId':uriId
             }
             # print(data)
             param_array.append(data)

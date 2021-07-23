@@ -44,6 +44,7 @@ function PersonForm() {
         );
         // create txt file with result
         const textFile = (result) => {
+          //console.log(result)
           const element = document.createElement("a");
           function textToSave() {
             let results =
@@ -53,6 +54,7 @@ function PersonForm() {
 
             for (let i = 0; i < result.length; i++) {
               const element = result[i];
+              //console.log(element);
 
               let data =
                 element["person"].concat(
@@ -64,7 +66,7 @@ function PersonForm() {
                 element["person"].concat(
                   "    " + "confidence" + "  " + element["confidence"] + "\n\n"
                 );
-              console.log(data);
+              //console.log(data);
 
               results += data;
             }
@@ -82,7 +84,7 @@ function PersonForm() {
 
         if (confidence) {
           // create text file
-          textFile(confidence);
+          //textFile(confidence);
           setConfidence(confidence);
           setLoading(false);
         }
@@ -240,7 +242,7 @@ function PersonForm() {
                       {confidence
                         .filter(
                           (c) =>
-                            c.givenName === item.givenName && c.wiki === "true"
+                            c.givenName === item.givenName && c.wiki === "true" && c.uriId ===item.uriId
                         )
                         .map((result) => {
                           if (result.confidence > 0) {
@@ -256,8 +258,7 @@ function PersonForm() {
                         .filter(
                           (c) =>
                             c.dob === item.birthDate &&
-                            c.wiki === "true" &&
-                            c.givenName === item.givenName
+                            c.wiki === "true" && c.uriId ===item.uriId
                         )
                         .map((result) => {
                           if (result.confidence > 0) {
@@ -274,7 +275,7 @@ function PersonForm() {
                     {confidence
                       .filter(
                         (c) =>
-                          c.givenName === item.givenName && c.wiki === "true"
+                          c.givenName === item.givenName && c.wiki === "true" && c.uriId ===item.uriId
                       )
                       .map((result) => {
                         if (result.confidence > 0) {
@@ -289,8 +290,7 @@ function PersonForm() {
                       .filter(
                         (c) =>
                           c.dob === item.birthDate &&
-                          c.wiki === "true" &&
-                          c.givenName === item.givenName
+                          c.wiki === "true" && c.uriId ===item.uriId
                       )
                       .map((result) => {
                         if (result.confidence > 0) {
@@ -309,7 +309,7 @@ function PersonForm() {
                         .filter(
                           (c) =>
                             c.givenName === item.givenName &&
-                            c.dbpedia === "true"
+                            c.dbpedia === "true" && c.uriId ===item.uriId
                         )
                         .map((result) => {
                           if (result.confidence > 0) {
@@ -326,8 +326,7 @@ function PersonForm() {
                         .filter(
                           (c) =>
                             c.dob === item.birthDate &&
-                            c.dbpedia === "true" &&
-                            c.givenName === item.givenName
+                            c.dbpedia === "true" && c.uriId ===item.uriId
                         )
                         .map((result) => {
                           if (result.confidence > 0) {
@@ -344,7 +343,7 @@ function PersonForm() {
                     {confidence
                       .filter(
                         (c) =>
-                          c.givenName === item.givenName && c.dbpedia === "true"
+                          c.givenName === item.givenName && c.dbpedia === "true" && c.uriId ===item.uriId
                       )
                       .map((result) => {
                         if (result.confidence > 0) {
@@ -359,8 +358,7 @@ function PersonForm() {
                       .filter(
                         (c) =>
                           c.dob === item.birthDate &&
-                          c.dbpedia === "true" &&
-                          c.givenName === item.givenName
+                          c.dbpedia === "true" && c.uriId ===item.uriId
                       )
                       .map((result) => {
                         if (result.confidence > 0) {
