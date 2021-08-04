@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { computeConfidence, getConfidenceTotals, getData } from "./person-helper-functions/index";
+import {
+  computeConfidence,
+  getConfidenceTotals,
+  getData,
+  getInstanceTotal,
+} from "./person-helper-functions/index";
 
 import axios from "axios";
 
@@ -13,11 +18,12 @@ function PersonForm() {
   const [predicate, setPredicate] = useState("all");
 
   const [confidenceTotal, setConfidenceTotal] = useState([]);
+  const [instanceTotal, setInstanceTotal] = useState([]);
+  const [instanceTotalForm, setInstanceTotalForm] = useState([]);
 
   // submit handler
   const submitHandler = (e) => {
     e.preventDefault();
-
     // check for required fields
     if (!selectedFile || !weightWiki || !weightDbPedia) {
       alert("Please look required fields.");
@@ -89,8 +95,10 @@ function PersonForm() {
           // create text file
           //textFile(confidence);
           setConfidence(confidence);
-          let arr=getConfidenceTotals
-          setConfidenceTotal(arr)
+          let arr = getConfidenceTotals;
+          setConfidenceTotal(arr);
+          let arr1 = getInstanceTotal;
+          setInstanceTotal(arr1);
           setLoading(false);
         }
       });
@@ -113,7 +121,7 @@ function PersonForm() {
     return resp;
   };
 
-   // get result based on predicates
+  // get result based on predicates
   return (
     <div>
       <form onSubmit={submitHandler}>
@@ -441,22 +449,70 @@ function PersonForm() {
       <div>
         <hr />
         <div className="row">
-        <div className="col-md-3"><b>Wiki Name Confidence Total</b></div>
-        <div className="col-md-3"><b>Wiki Dob Confidence Total</b></div>
-        <div className="col-md-3"><b>Dbpedia Name Confidence Total</b></div>
-        <div className="col-md-3"><b>Dbpedia Dob Confidence Total</b></div>
+          <div className="col-md-3">
+            <b>Wiki Name Confidence Total</b>
+          </div>
+          <div className="col-md-3">
+            <b>Wiki Dob Confidence Total</b>
+          </div>
+          <div className="col-md-3">
+            <b>Dbpedia Name Confidence Total</b>
+          </div>
+          <div className="col-md-3">
+            <b>Dbpedia Dob Confidence Total</b>
+          </div>
         </div>
-        {confidenceTotal.map((item,index)=>{
-          return(
+        {confidenceTotal.map((item, index) => {
+          return (
             <div className="row" key={index}>
-              <div className="col-md-3" style={{textAlign:'center'}}><b>{item.wikiName}</b></div>
-              <div className="col-md-3" style={{textAlign:'center'}}><b>{item.wikiDob}</b></div>
-              <div className="col-md-3" style={{textAlign:'center'}}><b>{item.dbpediaName}</b></div>
-              <div className="col-md-3" style={{textAlign:'center'}}><b>{item.dbpediaDob}</b></div>
+              <div className="col-md-3" style={{ textAlign: "center" }}>
+                <b>{item.wikiName}</b>
+              </div>
+              <div className="col-md-3" style={{ textAlign: "center" }}>
+                <b>{item.wikiDob}</b>
+              </div>
+              <div className="col-md-3" style={{ textAlign: "center" }}>
+                <b>{item.dbpediaName}</b>
+              </div>
+              <div className="col-md-3" style={{ textAlign: "center" }}>
+                <b>{item.dbpediaDob}</b>
+              </div>
             </div>
-          )
+          );
         })}
         <hr />
+        <div className="row">
+          <div className="col-md-3">
+            <b>Wiki Instance Total</b>
+          </div>
+          <div className="col-md-3">
+            <b>DBpedia Instance Total</b>
+          </div>
+          <div className="col-md-6">
+            <b>Instances Total</b>
+          </div>
+        </div>
+      </div>
+      {confidenceTotal.map((item, index) => {
+        return (
+          <div className="row" key={index}>
+            <div className="col-md-3" style={{ textAlign: "center" }}>
+              <b>{item.instanceTotalWiki}</b>
+            </div>
+            <div className="col-md-3" style={{ textAlign: "center" }}>
+              <b>{item.instanceTotalDbpedia}</b>
+            </div>
+            <div className="col-md-6" style={{ textAlign: "center" }}>
+              <b>{item.instanceTotal}</b>
+            </div>
+          </div>
+        );
+      })}
+      <hr />
+      <div className="row">
+        <div className="col-md-3" style={{ textAlign: "center" }}>
+          <b></b>
+        </div>
       </div>
     </div>
   );

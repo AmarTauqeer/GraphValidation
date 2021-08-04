@@ -1,12 +1,16 @@
 import GetWikiData from "../person-helper-functions/GetWikiData";
 import GetDbPediaData from "../person-helper-functions/GetDbPediaData";
 
+let wikiTotalInstances = 0;
+let dbpediaTotalInstances = 0;
+
 const computeConfidence = (data, weightWiki, weightDbPedia) => {
   let confidence = [];
   for (let i = 0; i < data.length; i++) {
     const element = data[i];
     // // wiki data
     if (element.wiki_status === "found") {
+      wikiTotalInstances += 1;
       let data = {
         givenName: element.givenName,
         dob: element.dob,
@@ -21,6 +25,7 @@ const computeConfidence = (data, weightWiki, weightDbPedia) => {
     }
     // dbpedia data
     if (element.dbpedia_status === "found") {
+      dbpediaTotalInstances += 1;
       let data = {
         givenName: element.givenName,
         dob: element.dob,
@@ -37,11 +42,25 @@ const computeConfidence = (data, weightWiki, weightDbPedia) => {
   //console.log(confidence);
   return confidence;
 };
+// get matched instance total based on name and dob
+
+const getInstanceTotal = () => {
+  let arr = [];
+  let data = {
+    wikiInstanceTotal: wikiTotalInstances,
+    dbpediaInstanceTotal: dbpediaTotalInstances,
+    totalInstanceBoth: wikiTotalInstances + dbpediaTotalInstances,
+  };
+  arr.push(data);
+  return arr;
+};
 // get confidence wiki name,dob plus dbpedia name,dob
 let wikiNameConfidenceTotal = 0;
 let wikiDobConfidenceTotal = 0;
 let dbPediaNameConfidenceTotal = 0;
 let dbPediaDobConfidenceTotal = 0;
+let instanceTotalWiki = 0;
+let instanceTotalDbpedia = 0;
 const getConfidenceTotals = () => {
   let arr = [];
   let data = {
@@ -49,13 +68,17 @@ const getConfidenceTotals = () => {
     wikiDob: wikiDobConfidenceTotal,
     dbpediaName: dbPediaNameConfidenceTotal,
     dbpediaDob: dbPediaDobConfidenceTotal,
+    instanceTotalWiki :instanceTotalWiki,
+    instanceTotalDbpedia :instanceTotalDbpedia,
+    instanceTotal :instanceTotalDbpedia+instanceTotalWiki
   };
   arr.push(data);
-//  console.log(arr);
+  //  console.log(arr);
   return arr;
 };
 const getData = async (graphData) => {
   let resp = graphData;
+  console.log(resp);
   let arr = [];
   if (resp) {
     // validation from wiki and dbpedia
@@ -83,6 +106,9 @@ const getData = async (graphData) => {
         if (wikiDob === birthDate) {
           wikiDobConfidenceTotal += 1;
         }
+        if (wikiName === givenName && wikiDob === birthDate) {
+          instanceTotalWiki += 1;
+        }
         arr = [
           ...arr,
           {
@@ -109,11 +135,15 @@ const getData = async (graphData) => {
         let dbpediaName = dbpediaData[0].personName["value"];
         let dbpediaDob = dbpediaData[0].year["value"];
         let dbpediaPerson = dbpediaData[0].person["value"];
+        
         if (dbpediaName === givenName) {
           dbPediaNameConfidenceTotal += 1;
         }
         if (dbpediaDob === birthDate) {
           dbPediaDobConfidenceTotal += 1;
+        }
+        if (dbpediaName === givenName && dbpediaDob === birthDate) {
+          instanceTotalDbpedia += 1;
         }
         //console.log(dbpediaData)
         arr = [
@@ -137,4 +167,4 @@ const getData = async (graphData) => {
   return arr;
 };
 
-export { computeConfidence, getData, getConfidenceTotals };
+export { computeConfidence, getData, getConfidenceTotals, getInstanceTotal };

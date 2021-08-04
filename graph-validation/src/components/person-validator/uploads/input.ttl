@@ -47,3 +47,11 @@
 <https://www.example.org/resource/1527> a so:Person;
   so:name "Ahmed I";
   so:birthDate "1590" .
+
+<https://www.example.org/resource/11955> a so:Person;
+  so:name "George H. W. Bush";
+  so:birthDate "1924" .
+
+<https://www.example.org/resource/25839> a so:Person;
+  so:name "Robert Menzies";
+  so:birthDate "1894" .
